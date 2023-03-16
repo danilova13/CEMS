@@ -6,7 +6,7 @@ import { color } from '@mui/material/colors';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 
-export default function User() {
+export default function Login() {
 
 	const paperStyle = {padding: '50px 20px', width: 600, margin:'20px auto' };
 	const [email, setEmail] = useState('');
@@ -19,11 +19,7 @@ export default function User() {
 			<h1 style={{color: 'black'}}>Log-in</h1>
 			<Box
 				component="form"
-				sx={{
-					'& > :not(style)': { m: 1, width: '40ch' },
-				}}
-				noValidate
-				autoComplete="off"
+				sx={{'& > :not(style)': { m: 1, width: '40ch' },}} noValidate autoComplete="off"
 			>
 				<TextField id="outlined-basic" label="User email" variant="outlined"
 				value={ email }
