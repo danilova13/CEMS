@@ -2,8 +2,9 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container, Paper} from '@mui/material';
-import { purple } from '@mui/material/colors';
+import { color } from '@mui/material/colors';
 import { useState } from 'react';
+import Button from '@mui/material/Button';
 
 export default function User() {
 
@@ -32,8 +33,10 @@ export default function User() {
 				input type="password"
 				value={(password)}
 				onChange={(e) => setPassword(e.target.value)}
-				/>
-			
+				/> <br/>
+				<Button  style={{maxWidth: '60px', maxHeight:'40px', backgroundColor: '#d3d3d3', color: '#003366', 
+					fontWeight: 'bold', fontSize: '12px'}} 
+					variant="contained">Submit</Button>
 			</Box>
 		</Paper>
 	</Container>
