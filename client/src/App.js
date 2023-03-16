@@ -1,6 +1,5 @@
 import './App.css';
 import Appbar from './components/Appbar';
-// import User from './components/User';
 import {Route, Routes} from 'react-router-dom';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
@@ -14,7 +13,6 @@ function App() {
         <Route path="/" element={ <Homepage/>} />
         <Route path="/login" element={ <Login/>} />
         <Route path="/admin" element={ <Admin/>} />
-
       </Routes>
     </div>
   );
