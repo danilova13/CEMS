@@ -5,63 +5,41 @@ import { Container, Paper } from "@mui/material";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import { AdminPanelSettings } from "@mui/icons-material";
+import CreateClub from "../components/CreateClub";
+import Modal from "@mui/material/Modal";
 
 const Admin = () => {
-  const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
-  const [clubName, setClubName] = useState("");
-  const [managerName, setManagerName] = useState("");
-  const [managerEmail, setManagerEmail] = useState("");
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <Container>
-      <Paper elevation={3} style={paperStyle}>
-        <Box
-          component="form"
-          sx={{ "& > :not(style)": { m: 1, width: "40ch" } }}
-          noValidate
-          autoComplete="off"
-        >
-          <label>Name of club</label>
-          <TextField
-            id="outlined-basic"
-            label="Enter the name of the club"
-            variant="outlined"
-            value={clubName}
-            onChange={(e) => setClubName(e.target.value)}
-          />
-          <label>Club manager name</label>
-          <TextField
-            id="outlined-basic"
-            label="Enter the club manager's name"
-            variant="outlined"
-            value={managerName}
-            onChange={(e) => setManagerName(e.target.value)}
-          />
-          <label>Club manager email</label>
-          <TextField
-            id="outlined-basic"
-            label="Enter the club manager's email"
-            variant="outlined"
-            value={managerEmail}
-            onChange={(e) => setManagerEmail(e.target.value)}
-          />
-          <br />
-          <Button
-            style={{
-              maxWidth: "60px",
-              maxHeight: "40px",
-              backgroundColor: "#d3d3d3",
-              color: "#003366",
-              fontWeight: "bold",
-              fontSize: "12px",
-            }}
-            variant="contained"
-          >
-            Submit
-          </Button>
+    <div>
+      <Button onClick={handleOpen}>Create club</Button>
+      <Button onClick={handleOpen}>Promote club members</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <CreateClub></CreateClub>
         </Box>
-      </Paper>
-    </Container>
+      </Modal>
+    </div>
   );
 };
 
