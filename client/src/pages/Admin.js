@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import { AdminPanelSettings } from "@mui/icons-material";
 import CreateClub from "../components/CreateClub";
 import Modal from "@mui/material/Modal";
+import PromoteMember from "../components/PromoteMember";
 
 const Admin = () => {
   const style = {
@@ -21,22 +22,38 @@ const Admin = () => {
     p: 4,
   };
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [showClub, setShowClub] = useState(false);
+  const [showMember, setShowMember] = useState(false);
+  const displayClubModal = () => setShowClub(true);
+  const hideClubModal = () => setShowClub(false);
+
+  const displayMemberModal = () => setShowMember(true);
+  const hideMemberModal = () => setShowMember(false);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Create club</Button>
-      <Button onClick={handleOpen}>Promote club members</Button>
+      <div className="flex justify-around w-42 h-150 mt-24">
+      <Button className="" onClick={displayClubModal} variant="contained" size="large" >Create club</Button>
+      <Button onClick={displayMemberModal} variant="contained" size="large">Promote club members</Button>
+      </div>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={showClub}
+        onClose={hideClubModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
           <CreateClub></CreateClub>
+        </Box>
+      </Modal>
+      <Modal
+        open={showMember}
+        onClose={hideMemberModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+         <PromoteMember></PromoteMember>
         </Box>
       </Modal>
     </div>
