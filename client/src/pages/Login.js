@@ -33,7 +33,7 @@ export default function Login() {
 			email,
 			firstName: 'Anya',
 			lastName: 'Danilova',
-			role: 'admin',
+			role:  email,
 		}
 
 		setAuth(mockUser);
