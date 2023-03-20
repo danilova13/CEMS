@@ -1,9 +1,6 @@
 package com.algoma.cems.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class User {
@@ -14,11 +11,20 @@ public class User {
     private int id;
     private String first_Name;
     private String last_Name;
-    private String email_Address;
+    @Column(unique = true)
+    private String email;
     private String password;
     private String role;
 
     public User() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getId() {
@@ -45,13 +51,6 @@ public class User {
         this.last_Name = last_Name;
     }
 
-    public String getEmail_Address() {
-        return email_Address;
-    }
-
-    public void setEmail_Address(String email_Address) {
-        this.email_Address = email_Address;
-    }
 
     public String getPassword() {
         return password;

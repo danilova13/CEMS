@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("UserService")
 
 public class UserServiceImplementation implements UserService{
     @Autowired
@@ -20,5 +20,14 @@ public class UserServiceImplementation implements UserService{
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User login(String email, String password) {
+        User person = userRepository.findByEmail(email);
+        if (person.getPassword().equals(password)){
+            return person;
+        }
+        return null;
     }
 }
