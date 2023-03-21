@@ -15,7 +15,7 @@ const ROLES = {
 
   'Student': 'student',
   'Admin': 'admin',
-  'Manager': 'manager'
+  'Manager': 'clubmanager'
 
 }
 

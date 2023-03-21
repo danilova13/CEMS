@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Image from '../images/photo5.jpg'
+import Popover from '@mui/material';
 
 
 
@@ -16,6 +17,7 @@ export default function Login() {
 	const paperStyle = {padding: '50px 20px', width: 600, margin:'20px auto' };
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [errorMsg, setErrorMsg] = useState('');
 
 	const { setAuth } = useAuth();
 
@@ -27,19 +29,28 @@ export default function Login() {
 		e.preventDefault();
 		const user = { email, password };
 		
-		// Instead of doing this, call the API
-		// and setAuth using what the API returned
-		const mockUser = {
-			email,
-			firstName: 'Anya',
-			lastName: 'Danilova',
-			role:  email,
-		}
+		fetch("http://localhost:8080/users/login",{
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify(user)
+		})
+		.then ((res) => {
+			if (res.ok) {
+				return res.json();
+			}
 
-		setAuth(mockUser);
-
-		//navigating to from value - where the user wanted to go before they were sent to the login page
-		navigate(from, {replace: true }); 
+			throw new Error("invalid input");
+		})
+		.then((data) => {
+			console.log(data);
+			setAuth(data);
+			//navigating to from value - where the user wanted to go before they were sent to the login page
+			navigate(from, {replace: true }); 
+		})
+		.catch((err) => {
+			console.log(err);
+			setErrorMsg("Invalid username or password");
+		})
 	}
   
 	return (
@@ -63,6 +74,9 @@ export default function Login() {
 				<Button onClick={handleSubmit}  style={{maxWidth: '60px', maxHeight:'40px', backgroundColor: '#d3d3d3', color: '#003366', 
 					fontWeight: 'bold', fontSize: '12px'}} 
 					variant="contained">Submit</Button>
+
+			 	{errorMsg && (<div className="popuptext"><p className="error"> {errorMsg}</p> </div>)} 
+			
 			</Box>
 		</Paper>
 		<Box sx={{}}>
