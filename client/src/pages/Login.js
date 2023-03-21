@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import Image from '../images/students.png'
+import Image from '../images/photo5.jpg'
 
 
 
@@ -65,6 +65,9 @@ export default function Login() {
 					variant="contained">Submit</Button>
 			</Box>
 		</Paper>
+		<Box sx={{}}>
+			<img src={Image} sx={{}}></img>
+		</Box>
 
 	</Container>
   );
