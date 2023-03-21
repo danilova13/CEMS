@@ -1,5 +1,4 @@
 package com.algoma.cems.controller;
-
 import com.algoma.cems.model.User;
 import com.algoma.cems.model.UserLoginRequest;
 import com.algoma.cems.repository.UserRepository;
@@ -15,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
