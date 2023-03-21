@@ -45,4 +45,10 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
+
+    @DeleteMapping("/")
+    public ResponseEntity<String> deleteAllUsers(){
+        userService.deleteAllUsers();
+        return ResponseEntity.ok("All users deleted");
+    }
 }
