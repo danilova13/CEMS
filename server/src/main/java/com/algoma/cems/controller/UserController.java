@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public String add(@RequestBody User user){
         userService.saveUser(user);
         return user.getFirst_Name() + " " + user.getLast_Name() + " has been added into DB";
@@ -41,7 +41,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
