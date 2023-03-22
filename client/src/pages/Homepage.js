@@ -1,7 +1,16 @@
+import MyClubs from "../components/MyClubs";
+import ClubList from "../components/ClubList";
+
+
 const Homepage = () => {
 	return (  
+	<div>
+		<MyClubs />
 
-		<h1>Homepage</h1>
+		<ClubList />
+
+	</div>
+	
 		
 	);
 }
