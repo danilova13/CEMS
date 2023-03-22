@@ -1,9 +1,12 @@
-const Homepage = () => {
-	return (  
+import Carousel from "../components/Carousel";
 
-		<h1>Homepage</h1>
-		
-	);
-}
- 
+const Homepage = () => {
+  return (
+    <div>
+      <h1>Homepage</h1>
+      <Carousel></Carousel>
+    </div>
+  );
+};
+
 export default Homepage;
