@@ -1,0 +1,29 @@
+{
+	"clubs": [
+		
+		{
+			"clubId": 1 ,
+			"clubName": "Photography Club",
+			"clubDescription": "This is a photography club, where people take pictures",
+			"clubImage": "photography.png"
+
+		},
+
+		{
+			"clubId": 2,
+			"clubName": "Scuba Diving Club",
+			"clubDescription": "This is a scubadiving club, where fun people scubadive",
+			"clubImage": "scuba.png"
+
+
+		},
+
+		{
+			"clubId": 3,
+			"clubName": "Cat Lovers Club",
+			"clubDescription": "This is a cat lovers club, where cat lovers share cat pics",
+			"clubImage": "cat.png"
+
+		}
+	]
+}

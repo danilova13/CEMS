@@ -1,7 +1,15 @@
+import { Box, Container } from "@mui/system";
+
+
 const ClubList = () => {
 	return (  
+		<Container>
 
-		<h1> This will be a club list</h1>
+			<Box sx={{fontWeight: 'bold', fontSize: 'h4', pb: 3, textAlign: 'left'}}> List of Clubs </Box>
+
+		</Container>
+		
+		
 	);
 }
  

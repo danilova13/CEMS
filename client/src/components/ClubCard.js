@@ -15,7 +15,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import Image from '../images/chessclub.png'
+
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -34,16 +34,17 @@ const ClubCard = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard( {club}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+
   };
 
 //the code for the card 
   return (
-    <Card sx={{ maxWidth: 220}}>
+    <Card sx={{ maxWidth: 230, minHeight: 350}}>
 
       <CardHeader
         avatar={
@@ -57,28 +58,28 @@ export default function RecipeReviewCard() {
         //   </IconButton>
         // }
 		titleTypographyProps={{variant:'h6', fontWeight: 'bold' }}
-        title="Chess Club"
+        title={club.clubName}
         subheader=""
       />
 
       <CardMedia
         component="img"
         height="194"
-        image={Image}
+        image={require(`../images/${club.clubImage}`)}
         alt="club_image"
       />
 
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Chessclub Description 
+          Click below to learn more
         </Typography>
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        {/* <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-       
+        */}
         <ExpandMore
           expand="false"
           onClick={handleExpandClick}
@@ -91,18 +92,8 @@ export default function RecipeReviewCard() {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Description:</Typography>
           <Typography paragraph>
-           Club's activities
-          </Typography>
-          <Typography paragraph>
-           Paragraph 1
-          </Typography>
-          <Typography paragraph>
-			Paragraph 2
-          </Typography>
-          <Typography>
-            Message
+           {club.clubDescription}
           </Typography>
         </CardContent>
       </Collapse>
