@@ -1,14 +1,10 @@
-import Carousel from "react-material-ui-carousel";
+import ClubCarousel from "../components/ClubCarousel";
 
 const Homepage = () => {
   return (
     <div>
       <h1>Homepage</h1>
-      <Carousel>
-        {this.props.item.images.map((image, i) => (
-          <img key={i} src={image} />
-        ))}
-      </Carousel>
+      <ClubCarousel></ClubCarousel>
     </div>
   );
 };
