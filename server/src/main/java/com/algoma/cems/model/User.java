@@ -16,7 +16,15 @@ public class User {
     private String password;
     private String role;
 
-    public User() {
+    public User(){
+
+    }
+    public User(String first_Name, String last_Name, String email, String password, String role) {
+        this.first_Name = first_Name;
+        this.last_Name = last_Name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     public String getEmail() {
