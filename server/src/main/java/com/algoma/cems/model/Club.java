@@ -17,6 +17,12 @@ public class Club {
     public Club() {
     }
 
+    public Club(String nameClub, String clubDescription, String imageString){
+        this.nameClub = nameClub;
+        this.clubDescription = clubDescription;
+        this.imageString = imageString;
+    }
+
     public int getIdClub() {
         return idClub;
     }

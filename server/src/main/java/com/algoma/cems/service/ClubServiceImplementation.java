@@ -12,6 +12,7 @@ import java.util.Optional;
 public class ClubServiceImplementation implements ClubService{
     @Autowired
     private ClubRepository clubRepository;
+
     @Override
     public Club saveClub(Club club) {
         return clubRepository.save(club);
@@ -27,5 +28,9 @@ public class ClubServiceImplementation implements ClubService{
         Optional<Club> clubSelected = clubRepository.findById(idClub);
         Club club = clubSelected.get();
         return club;
+    }
+    @Override
+    public void deleteAllClubs() {
+        clubRepository.deleteAll();
     }
 }
