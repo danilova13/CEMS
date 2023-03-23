@@ -1,11 +1,15 @@
 {
+	"users": [
+		{ "id": 1 }
+	],
 	"clubs": [
 		
 		{
 			"clubId": 1 ,
 			"clubName": "Photography Club",
 			"clubDescription": "This is a photography club, where people take pictures",
-			"clubImage": "photography.png"
+			"clubImage": "photography.png",
+			"userId": 1
 
 		},
 
@@ -22,7 +26,8 @@
 			"clubId": 3,
 			"clubName": "Cat Lovers Club",
 			"clubDescription": "This is a cat lovers club, where cat lovers share cat pics",
-			"clubImage": "cat.png"
+			"clubImage": "cat.png",
+			"userId": 1
 
 		}
 	]
