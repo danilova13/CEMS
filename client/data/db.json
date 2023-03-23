@@ -8,7 +8,7 @@
 			"clubId": 1 ,
 			"clubName": "Photography Club",
 			"clubDescription": "This is a photography club, where people take pictures",
-			"clubImage": "photography.png",
+			"clubImage": "photography1.png",
 			"userId": 1
 
 		},
@@ -17,7 +17,8 @@
 			"clubId": 2,
 			"clubName": "Scuba Diving Club",
 			"clubDescription": "This is a scubadiving club, where fun people scubadive",
-			"clubImage": "scuba.png"
+			"clubImage": "scuba.png",
+			"userId": 1
 
 
 		},
@@ -28,6 +29,38 @@
 			"clubDescription": "This is a cat lovers club, where cat lovers share cat pics",
 			"clubImage": "cat.png",
 			"userId": 1
+
+		},
+
+		{
+			"clubId": 4,
+			"clubName": "Chess Club",
+			"clubDescription": "This is a chess club",
+			"clubImage": "chessclub.png"
+
+		},
+
+		{
+			"clubId": 5,
+			"clubName": "Computer Science Club",
+			"clubDescription": "This is a computer science club",
+			"clubImage": "students.png"
+
+		},
+
+		{
+			"clubId": 6,
+			"clubName": "Math Club",
+			"clubDescription": "This is a mathclub club",
+			"clubImage": "chessclub.png"
+
+		},
+
+		{
+			"clubId": 7,
+			"clubName": "Basketball Club",
+			"clubDescription": "This is a basketball club",
+			"clubImage": "chessclub.png"
 
 		}
 	]
