@@ -29,4 +29,8 @@ public class EventServiceImplementation implements EventService{
         Event event = eventSelected.get();
         return event;
     }
+    @Override
+    public void deleteAllEvents() {
+        eventRepository.deleteAll();
+    }
 }

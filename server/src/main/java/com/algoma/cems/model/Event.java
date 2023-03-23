@@ -24,6 +24,15 @@ public class Event {
     public Event() {
     }
 
+    public Event(String nameEvent, String dateEvent, Time timeEvent, String locationEvent, int costEvent, String eventDescription) {
+        this.nameEvent = nameEvent;
+        this.dateEvent = dateEvent;
+        this.timeEvent = timeEvent;
+        this.locationEvent = locationEvent;
+        this.costEvent = costEvent;
+        this.eventDescription = eventDescription;
+    }
+
     public int getIdEvent() {
         return idEvent;
     }
