@@ -19,7 +19,7 @@ export default function Login() {
 	const [password, setPassword] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 
-	const { setAuth } = useAuth();
+	const { setAuth, setLoginString } = useAuth();
 
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -42,8 +42,9 @@ export default function Login() {
 			throw new Error("invalid input");
 		})
 		.then((data) => {
-			localStorage.setItem('userName', data.first_Name);
 			console.log(111, data);
+			localStorage.setItem('userName', data.first_Name);
+			setLoginString("Log out"); // switch the login button text to log out on successful login
 			setAuth(data);
 			//navigating to from value - where the user wanted to go before they were sent to the login page
 			navigate(from, {replace: true }); 

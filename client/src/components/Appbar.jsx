@@ -14,17 +14,24 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-
+import useAuth from '../hooks/useAuth';
 
 const drawerWidth = 240;
-const navItems = ['Admin', 'Manager', 'Clubs', 'Login'];
+const navItems = ['Admin', 'Manager', 'Clubs'];
 
 export default function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { loginString, setLoginString } = useAuth();
+  const loggedUser = localStorage.getItem("userName");
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const logoutClickHandler = () => {
+    localStorage.removeItem("userName");
+    setLoginString("Login");
   };
 
   const drawer = (
@@ -77,6 +84,18 @@ export default function DrawerAppBar(props) {
                 </Link>
               </Button>
             ))}
+            {/* If a user is logged in, a log out button will be displayed  
+            otherewise will show as login with respective routes and functions*/}
+            {loggedUser ? 
+               <Button onClick={logoutClickHandler} sx={{ color: "white" , fontWeight: 'bold'}}>
+                  {loginString}
+              </Button>
+              :
+               <Button sx={{ color: "white" }}>
+                <Link to={`/login`} style={{color: 'white', textDecorationLine:'none', fontWeight: 'bold'}}>
+                {loginString}
+                </Link>
+              </Button>}
           </Box>
         </Toolbar>
       </AppBar>
