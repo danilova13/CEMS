@@ -42,7 +42,8 @@ export default function Login() {
 			throw new Error("invalid input");
 		})
 		.then((data) => {
-			console.log(data);
+			localStorage.setItem('userName', data.first_Name);
+			console.log(111, data);
 			setAuth(data);
 			//navigating to from value - where the user wanted to go before they were sent to the login page
 			navigate(from, {replace: true }); 

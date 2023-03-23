@@ -7,10 +7,14 @@ const RequireAuth = ({ allowedRoles }) => {
 	const { auth } = useAuth();
 	const location = useLocation();
 
+  const loggedUser = localStorage.getItem("userName");
+  console.log(222, loggedUser);
+
 	return (
 		//roles is an array and allowedRoles is an array that is passed into this component
 		//checks if the allowedRoles array has the role that is being passed unitl it finds one 
-		allowedRoles?.includes(auth?.role)
+		// allowedRoles?.includes(auth?.role)
+		loggedUser
 			? <Outlet />
 			: auth?.role
 				? <Navigate to="/unauthorized" state={{ from: location }} replace />
