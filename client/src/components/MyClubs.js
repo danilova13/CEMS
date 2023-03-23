@@ -11,11 +11,6 @@ const MyClubs = () => {
 	const [ clubs, setClubs ] = useState([]);
 	const { auth } = useAuth();
 
-	// const [ clubId, setClubId ] = useState('');
-	// const [ clubName, setClubName ] = useState('');
-	// const [ clubDescription, setClubDescription] = useState('');
-	// const [ imageName, setImageName ] = useState('');
-
 	useEffect(() => {
 		fetch(`http://localhost:8000/users/${auth.id}/clubs`)
 			.then(res => res.json())
