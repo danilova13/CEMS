@@ -11,6 +11,8 @@ public interface UserService {
     public List<User> getAllUsers();
 
     public User login(String email, String password);
+
+    public void deleteAllUsers();
 }
 
 

@@ -30,4 +30,9 @@ public class UserServiceImplementation implements UserService{
         }
         return null;
     }
+
+    @Override
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
+    }
 }
