@@ -66,17 +66,16 @@ public class DatabaseSeeder implements CommandLineRunner {
         userController.add(new User("Lev", "On", "Admin2@algomau.ca", "Admin2", "admin"));
 
 
-        // Currently missing the image string! Anna please input it and remove this comment when it's done! //
-        clubController.add(new Club("Computer Science Club", "This is the Computer Science Club", " "));
-        clubController.add(new Club("Photography Club", "This is the Photography Club", " "));
-        clubController.add(new Club("Basketball Club", "This is the Basketball Club", " "));
-        clubController.add(new Club("Chess Club", "This is the Chess Club", " "));
-        clubController.add(new Club("Finance Club", "This is the Finance Club", " "));
-        clubController.add(new Club("Rock Climbing Club", "This is the Rock Climbing Club", " "));
-        clubController.add(new Club("Winter Sports Club", "This is the Winter Sports Club", " "));
-        clubController.add(new Club("Nature Club", "This is the Nature Club", " "));
-        clubController.add(new Club("Scuba diving Club", "This is the Scuba Diving Club", " "));
-        clubController.add(new Club("Travel Club", "This is the Travel Club", " "));
+        clubController.add(new Club("Computer Science Club", "This is the Computer Science Club", " science.png "));
+        clubController.add(new Club("Photography Club", "This is the Photography Club", " photography.png"));
+        clubController.add(new Club("Basketball Club", "This is the Basketball Club", "basketball.png"));
+        clubController.add(new Club("Chess Club", "This is the Chess Club", " chessclub.png "));
+        clubController.add(new Club("Finance Club", "This is the Finance Club", "finance.png"));
+        clubController.add(new Club("Rock Climbing Club", "This is the Rock Climbing Club", "rockclimbing.png"));
+        clubController.add(new Club("Winter Sports Club", "This is the Winter Sports Club", "wintersports.png "));
+        clubController.add(new Club("Nature Club", "This is the Nature Club", " nature.png"));
+        clubController.add(new Club("Scuba diving Club", "This is the Scuba Diving Club", "scuba.png"));
+        clubController.add(new Club("Travel Club", "This is the Travel Club", "travel.png"));
 
         eventController.add(new Event("CS Club Orientation", "Saturday April 15, 2023", sqlTime , "Algoma University SSM", 0, "Meet and greet everyone!"));
         eventController.add(new Event("Photography Headshots", "Tuesday April 21, 2023", sqlTime , "Algoma University Brampton", 50, "Come for a lesson on photography with Ahmed!"));
