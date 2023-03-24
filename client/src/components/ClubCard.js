@@ -42,7 +42,6 @@ export default function RecipeReviewCard( {club}) {
 
   };
 
-//the code for the card 
   return (
     <Card sx={{ maxWidth: 230, minHeight: 350}}>
 
@@ -52,12 +51,8 @@ export default function RecipeReviewCard( {club}) {
             CEMS
           </Avatar>
         }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-		titleTypographyProps={{variant:'h6', fontWeight: 'bold' }}
+    
+		    titleTypographyProps={{variant:'h6', fontWeight: 'bold' }}
         title={club.clubName}
         subheader=""
       />
