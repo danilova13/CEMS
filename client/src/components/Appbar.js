@@ -14,18 +14,24 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 
 const drawerWidth = 240;
-const navItems = ['Admin', 'Manager', 'Clubs', 'Login'];
+const navItems = ['Admin', 'Manager', 'Clubs'];
 
 export default function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { auth, setAuth } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const onLogout = () => {
+    setAuth({});
+  }
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ justifyContent: 'flex-start' }}>
@@ -42,6 +48,15 @@ export default function DrawerAppBar(props) {
             </ListItemButton>
           </ListItem>
         ))}
+          <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }} >
+              {
+                auth.id
+                  ? <Button onClick={onLogout}>Log Out</Button>
+                  : <Link to={`/login`}>Login</Link>
+              }
+            </ListItemButton>
+          </ListItem>
       </List>
     </Box>
   );
@@ -77,6 +92,15 @@ export default function DrawerAppBar(props) {
                 </Link>
               </Button>
             ))}
+            {
+              auth.id
+                ? <Button onClick={onLogout}>
+                  <Link style={{color: 'white', textDecorationLine:'none', fontWeight: 'bold'}}>LOGOUT</Link>
+                  </Button>
+                : <Button sx={{ color: "white" }}>
+                  <Link to={`/login`} style={{color: 'white', textDecorationLine:'none', fontWeight: 'bold'}}>LOGIN</Link>
+                </Button>
+            }
           </Box>
         </Toolbar>
       </AppBar>
