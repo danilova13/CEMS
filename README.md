@@ -22,7 +22,11 @@ Club Event Management System Software
 FName    LName    Email                PW          role
 
 Jimmy    Phan     Student1@algomau.ca  Student1    student
+
 Anna     D        Student2@algomau.ca  Student2    student
+
 Ahmed    Elmolla  CM1@algomau.ca       CM1         clubmanager
+
 Cathy    Tanya    Admin1@algomau.ca    Admin1      admin
+
 Lev      On       Admin2@algomau.ca    Admin2      admin
