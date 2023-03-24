@@ -1,12 +1,19 @@
-import ClubCarousel from "../components/ClubCarousel";
+import MyClubs from "../components/MyClubs";
+import ClubList from "../components/ClubList";
+
+
 
 const Homepage = () => {
-  return (
-    <div>
-      <h1>Homepage</h1>
-      <ClubCarousel></ClubCarousel>
-    </div>
-  );
-};
+	return (  
+	<div>
+		<MyClubs />
 
+		<ClubList />
+
+	</div>
+	
+		
+	);
+}
+ 
 export default Homepage;
