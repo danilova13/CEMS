@@ -1,9 +1,10 @@
 package com.algoma.cems.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Club {
@@ -13,6 +14,11 @@ public class Club {
     private String nameClub;
     private String clubDescription;
     private String imageString;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enrolledClubs")
+    private Set<User> enrolledUsers = new HashSet<>();
+
 
     public Club() {
     }
@@ -44,12 +50,18 @@ public class Club {
         this.clubDescription = clubDescription;
     }
 
-
     public String getImageString() {
         return imageString;
     }
     public void setImageString(String imageString) {
         this.imageString = imageString;
+    }
+
+    public Set<User> getEnrolledUsers() {
+        return enrolledUsers;
+    }
+    public void setEnrolledUsers(Set<User> enrolledUsers) {
+        this.enrolledUsers = enrolledUsers;
     }
 
 }

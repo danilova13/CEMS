@@ -1,16 +1,19 @@
 package com.algoma.cems.controller;
+import com.algoma.cems.model.Club;
+import com.algoma.cems.model.Event;
 import com.algoma.cems.model.User;
 import com.algoma.cems.model.UserLoginRequest;
 import com.algoma.cems.repository.UserRepository;
+import com.algoma.cems.service.ClubService;
+import com.algoma.cems.service.EventService;
 import com.algoma.cems.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
@@ -18,7 +21,10 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private ClubService clubService;
+    @Autowired
+    private EventService eventService;
     @Autowired
     private UserRepository userRepository;
 
@@ -50,5 +56,35 @@ public class UserController {
     public ResponseEntity<String> deleteAllUsers(){
         userService.deleteAllUsers();
         return ResponseEntity.ok("All users deleted");
+    }
+
+    @PutMapping("/{id}/clubs/{idClub}")
+    public User userEnrolledInClub(
+            @PathVariable int id,
+            @PathVariable int idClub
+    ){
+        return userService.userEnrolledInClub(id,idClub);
+    }
+
+    @PutMapping("/{id}/events/{idEvent}")
+    public User userEnrolledInEvent(
+            @PathVariable int id,
+            @PathVariable int idEvent
+    ){
+        return userService.userEnrolledInEvent(id,idEvent);
+    }
+
+    @GetMapping("/{id}/clubs")
+    public Set<Club> listOfClub(
+            @PathVariable int id
+    ){
+        return userService.getClubsForUser(id);
+    }
+
+    @GetMapping("/{id}/events")
+    public Set<Event> listOfEvent(
+            @PathVariable int id
+    ){
+        return userService.getEventForUser(id);
     }
 }

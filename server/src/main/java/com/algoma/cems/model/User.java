@@ -2,6 +2,9 @@ package com.algoma.cems.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class User {
 
@@ -15,6 +18,21 @@ public class User {
     private String email;
     private String password;
     private String role;
+
+    @ManyToMany
+    @JoinTable(name = "clubs_user_in",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "club_id")
+    )
+    private Set<Club> enrolledClubs = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "event_user_in",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> attendingEvent = new HashSet<>();
+
 
     public User(){
 
@@ -75,4 +93,21 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public Set<Club> getEnrolledClubs() {
+        return enrolledClubs;
+    }
+
+    public void setEnrolledClubs(Set<Club> enrolledClubs) {
+        this.enrolledClubs = enrolledClubs;
+    }
+
+    public Set<Event> getAttendingEvent() {
+        return attendingEvent;
+    }
+
+    public void setAttendingEvent(Set<Event> attendingEvent) {
+        this.attendingEvent = attendingEvent;
+    }
+
 }
