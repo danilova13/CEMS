@@ -1,8 +1,9 @@
-import ClubCard from "./ClubCard";
+// import ClubCard from "./ClubCard";
 import { Grid, Box, Typography} from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
+import ClubListCard from "./ClubListCard";
 
 const ClubCarousel = () => {
 
@@ -26,10 +27,11 @@ const ClubCarousel = () => {
          {clubs.map(club => (
             <Grid container justifyContent="center">
               <Grid item key={clubs.clubId}> 
-                <ClubCard className="h-[30vh] w-full rounded-lg shadow-xl" club={club}/>
+                <ClubListCard className="h-[50vh] w-full rounded-lg shadow-xl" club={club}/>
               </Grid>
             </Grid>
           ))}
+          
        
       </Carousel>
     </div>
