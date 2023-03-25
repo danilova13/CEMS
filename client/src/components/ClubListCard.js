@@ -9,8 +9,20 @@ import { ButtonGroupProps } from '@mui/material';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
+import {Modal} from '@mui/material';
+import { Container, Paper } from "@mui/material";
+import SignUpForm from './SignUpForm';
+import Box from "@mui/material/Box";
+import { useState } from 'react';
+
+
 
 export default function ClubListCard({club}){
+
+	const [ showSignUpForm, setShowSignUpForm ] = useState(false);
+	const displaySignUpForm = () => setShowSignUpForm(true);
+	const hideSignUpForm = () => setShowSignUpForm(false);
+
 	return ( 
 		<Card sx={{ minWidth: 345 }}>
 		 <CardHeader
@@ -34,9 +46,24 @@ export default function ClubListCard({club}){
 			{club.clubDescription}
 		  </Typography>
 		</CardContent>
+
 		<CardActions>
-		  <Button size="small" sx={{color: '#dd2c00', fontWeight: 'bold'}}>Sign Up</Button>
+		  <Button 
+			className="" onClick={displaySignUpForm} 
+			size="small" sx={{color: '#dd2c00', fontWeight: 'bold'}}
+			>
+			Sign Up</Button>
 		</CardActions>
+		<Modal
+			open={showSignUpForm}
+			onClose={hideSignUpForm}
+			aria-labelledby="modal-modal-title"
+			aria-describedby="modal-modal-description"
+      	>
+        <Box>
+			<SignUpForm onClose={hideSignUpForm} />
+        </Box>
+      </Modal>
 	  </Card>
 	);
   }
