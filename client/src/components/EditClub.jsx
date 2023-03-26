@@ -18,9 +18,7 @@ const EditClub = ({clubModalHandleClick}) => {
   
   const [club, setClub] = useState("");
   const[dbClubs, setDbClubs] = useState([]);
-  const selectedClub = dbClubs.find(dbClub => dbClub.nameClub == club);
-  
-  console.log(111, selectedClub);
+  const [selectedClub, setSelectedClub] = useState({});
 
   React.useEffect(() => {
     fetch("http://localhost:8080/clubs/", { //review this line
@@ -34,7 +32,7 @@ const EditClub = ({clubModalHandleClick}) => {
           throw new Error("invalid input");
         })
         .then((data) => {
-          console.log(121, data);
+          console.log(111, data);
           setDbClubs(prev => data)
         })
         .catch((err) => {
@@ -46,12 +44,22 @@ const EditClub = ({clubModalHandleClick}) => {
     }
   }, [])
 
+  React.useEffect(() => {
+    const foundClub = dbClubs.find(dbClub => dbClub.nameClub == club);
+    setSelectedClub(prev => foundClub)
+    // console.log(222, selectedClub);
+
+    return () => {
+  
+    }
+  }, [club, setClub])
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(111,JSON.stringify(clubData));
+    // console.log(111,JSON.stringify(clubData));
 
     fetch("http://localhost:8080/clubs/",{
-			method: "POST",
+			method: "PUT",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify(clubData)
 		})
@@ -112,7 +120,7 @@ const EditClub = ({clubModalHandleClick}) => {
         >
           <TextField
             id="outlined-basic"
-            label={selectedClub.nameClub|| "Name of the club"}
+            label={selectedClub?.nameClub|| "Name of the club"}
             variant="outlined"
             name="nameClub"
             value={clubData.nameClub}
@@ -120,7 +128,7 @@ const EditClub = ({clubModalHandleClick}) => {
             />
           <TextField
             id="outlined-basic"
-            label={selectedClub.clubDescription|| "Club description"}
+            label={selectedClub?.clubDescription|| "Club description"}
             variant="outlined"
             name="clubDescription"
             value={clubData.clubDescription}
@@ -128,7 +136,7 @@ const EditClub = ({clubModalHandleClick}) => {
             />
           <TextField
             id="outlined-basic"
-            label={selectedClub.imageString|| "Club image url"}
+            label={selectedClub?.imageString|| "Club image url"}
             variant="outlined"
             name="imageString"
             value={clubData.imageString}

@@ -54,10 +54,10 @@ const CreateEvent = ({eventModalHandleClick}) => {
         >
           <TextField
             id="outlined-basic"
-            label="Name of the club"
+            label="Name of the event"
             variant="outlined"
-            name="nameClub"
-            value={eventData.nameClub}
+            name="nameEvent"
+            value={eventData.nameEvent}
             onChange={handleChange}
             />
           <TextField
