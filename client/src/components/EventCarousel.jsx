@@ -12,25 +12,22 @@ const EventCarousel = () => {
       .then(res => res.json())
       .then(data => setEvents(prev => data))
   }, [])
-
+  
   return (
-
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-end">
       <Carousel 
-        className="w-[50%]"
+        className="w-[50%] h-full"
         animation="slide"
         newButtonsAlwaysVisible={true}
         duration={1500}
       >
          {events.map(event => (
-            <Grid container justifyContent="center">
-              <Grid item key={event.eventId}>
-                <EventCard className="h-[50vh] w-full rounded-lg shadow-xl" event={event}></EventCard>
+            <Grid item key={event.idEvent} container justifyContent="center">
+              <Grid >
+                <EventCard className="max-h-[70vh] rounded-lg shadow-xl" event={event}></EventCard>
               </Grid>
             </Grid>
           ))}
-          
-       
       </Carousel>
     </div>
   );
