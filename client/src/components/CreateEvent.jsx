@@ -6,19 +6,19 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import { AdminPanelSettings } from "@mui/icons-material";
 
-const CreateClub = ({clubModalHandleClick}) => {
+const CreateEvent = ({eventModalHandleClick}) => {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
-  const defaultData = {nameClub: "", clubDescription: "", imageString: "",};
-  const [clubData, setClubData] = useState(defaultData);
+  const defaultData = {nameEvent: "", dateEvent:"", locationEvent: "", costEvent: 0, eventDescription: "",};
+  const [eventData, setEventData] = useState(defaultData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(111,JSON.stringify(clubData));
+    console.log(111,JSON.stringify(eventData));
 
-    fetch("http://localhost:8080/clubs/",{
+    fetch("http://localhost:8080/events/",{
 			method: "POST",
 			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify(clubData)
+			body: JSON.stringify(eventData)
 		})
 		.then ((res) => {
 			if (res.ok) {
@@ -34,12 +34,12 @@ const CreateClub = ({clubModalHandleClick}) => {
 			console.log(err);
 		})
 
-    clubModalHandleClick()
+    eventModalHandleClick()
   }
 
   const handleChange = (e) => {
    const {name, value} = e.target;
-   setClubData(prev => ({...prev, [name]: value}))
+   setEventData(prev => ({...prev, [name]: value}))
   }
 
   return (
@@ -57,23 +57,42 @@ const CreateClub = ({clubModalHandleClick}) => {
             label="Name of the club"
             variant="outlined"
             name="nameClub"
-            value={clubData.nameClub}
+            value={eventData.nameClub}
             onChange={handleChange}
             />
           <TextField
             id="outlined-basic"
-            label="Club description"
+            label="Event date"
+            type="date"
             variant="outlined"
-            name="clubDescription"
-            value={clubData.clubDescription}
+            name="dateEvent"
+            defaultValue={eventData.dateEvent} //review this
+            onChange={handleChange}
+            />
+
+          <TextField
+            id="outlined-basic"
+            label="Event Location"
+            variant="outlined"
+            name="locationEvent"
+            value={eventData.locationEvent}
             onChange={handleChange}
             />
           <TextField
             id="outlined-basic"
-            label="Club image url"
+            label="Event cost"
             variant="outlined"
-            name="imageString"
-            value={clubData.imageString}
+            name="costEvent"
+            type="number"
+            value={eventData.costEvent}
+            onChange={handleChange}
+            />
+          <TextField
+            id="outlined-basic"
+            label="Event description"
+            variant="outlined"
+            name="eventDescription"
+            value={eventData.eventDescription}
             onChange={handleChange}
             />
           <br />
@@ -97,4 +116,4 @@ const CreateClub = ({clubModalHandleClick}) => {
   );
 };
 
-export default CreateClub;
+export default CreateEvent;

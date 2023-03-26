@@ -4,15 +4,15 @@ import { Container, Paper } from "@mui/material";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import { AdminPanelSettings } from "@mui/icons-material";
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Chip from "@mui/material/Chip";
 
-const PromoteMember = () => {
+const PromoteMember = ({ memberModalHandleClick }) => {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -24,22 +24,7 @@ const PromoteMember = () => {
       },
     },
   };
-  
-  const members = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
 
-  const clubs = ["Cosc", "Chess", "Music", "Math"];
-  
   function getStyles(name, member, theme) {
     return {
       fontWeight:
@@ -48,40 +33,85 @@ const PromoteMember = () => {
           : theme.typography.fontWeightMedium,
     };
   }
+
   const theme = useTheme();
-  const [club, setClub] = useState([]);
-  const [member, setMember] = useState([]);
-  // const defaultValues = {
-  //   clubs: "",
-  //   members: "",
-  // };
+  const[dbMembers, setDbMembers] = useState([]);
+  const[dbClubs, setDbClubs] = useState([]);
 
-  // const [values, setValues] = useState(defaultValues);
+React.useEffect(() => {
+  fetch("http://localhost:8080/users/", { //review this line
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
 
-  const handleClubChange = (event) => {
-    const {name,value} = event.target;
+        throw new Error("invalid input");
+      })
+      .then((data) => {
+        setDbMembers(prev => data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    // setValues({
-    //   ...values,
-    //   [name]: value,
-    // });
+  fetch("http://localhost:8080/clubs/", { //review this line
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
 
-      setClub(value);
+        throw new Error("invalid input");
+      })
+      .then((data) => {
+        setDbClubs(prev => data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  return () => {
+
+  }
+}, [])
+
+
+  const defaultValues = { club: [], member: [] };
+  const [values, setValues] = useState(defaultValues);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(111, JSON.stringify(values));
+
+    //Add correct endpoint below
+    fetch("http://localhost:8080/users/promote", {//review this line
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        throw new Error("invalid input");
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    memberModalHandleClick();
   };
 
-  const handleMemberChange = (event) => {
-    const {name,value} = event.target;
-
-    // setValues({
-    //   ...values,
-    //   [name]: value,
-    // });
-
-    if (name === "members")
-      setMember(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -92,78 +122,82 @@ const PromoteMember = () => {
           sx={{ "& > :not(style)": { m: 1, width: "40ch" } }}
           noValidate
           autoComplete="off"
+          onSubmit={handleSubmit}
         >
           <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="clubs">Clubs</InputLabel>
-        <Select
-          labelId="clubs"
-          id="clubs"
-          multiple
-          name="clubs"
-          value={club}
-          onChange={handleClubChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Clubs" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {clubs.map((club) => (
-            <MenuItem
-              key={club}
-              value={club}
-              style={getStyles(club, member, theme)}
+            <InputLabel id="clubs">Clubs</InputLabel>
+            <Select
+              labelId="clubs"
+              id="clubs"
+              multiple
+              name="club"
+              value={values.club}
+              onChange={handleChange}
+              input={<OutlinedInput id="select-multiple-chip" label="Clubs" />}
+              renderValue={(selected) => (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              )}
+              MenuProps={MenuProps}
             >
-              {club}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+              {dbClubs.map((club) => (
+                <MenuItem
+                  key={club.nameClub}
+                  value={club.nameClub}
+                  style={getStyles(club.nameClub, values.member, theme)}
+                >
+                  {club.nameClub}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <br />
           <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="members">Members</InputLabel>
-        <Select
-          labelId="members"
-          id="members"
-          multiple
-          name="members"
-          value={member}
-          onChange={handleMemberChange}
-          input={<OutlinedInput id="select-multiple-chip" label="members" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {members.map((member) => (
-            <MenuItem
-              key={member}
-              value={member}
-              style={getStyles(member, member, theme)}
+            <InputLabel id="members">Members</InputLabel>
+            <Select
+              labelId="members"
+              id="members"
+              multiple
+              name="member"
+              value={values.member}
+              onChange={handleChange}
+              input={
+                <OutlinedInput id="select-multiple-chip" label="members" />
+              }
+              renderValue={(selected) => (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {selected.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              )}
+              MenuProps={MenuProps}
             >
-              {member}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+              {dbMembers.map((member) => (
+                <MenuItem
+                  key={member.first_Name}
+                  value={`${member.first_Name} ${member.last_Name}`}
+                  style={getStyles(member, values.member, theme)}
+                >
+                  {`${member.first_Name} ${member.last_Name}`}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Button
             style={{
               maxWidth: "60px",
               maxHeight: "40px",
-              backgroundColor: "#d3d3d3",
-              color: "#003366",
+              backgroundColor: "#FC9F26",
+              color: "#fffff",
               fontWeight: "bold",
               fontSize: "12px",
             }}
             variant="contained"
+            type="submit"
           >
             Submit
           </Button>
