@@ -8,9 +8,22 @@ import { AdminPanelSettings } from "@mui/icons-material";
 
 const CreateClub = () => {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
-  const [clubName, setClubName] = useState("");
-  const [managerName, setManagerName] = useState("");
-  const [managerEmail, setManagerEmail] = useState("");
+  // const [clubName, setClubName] = useState("");
+  // const [clubDescription, setClubDescription] = useState("");
+  // const [clubImage, setclubImage] = useState("");
+  const defaultData = {clubName: "", clubDescription: "", clubImage: "",};
+  const [clubData, setClubData] = useState(defaultData);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // setClubData(e)
+    console.log(111,JSON.stringify(clubData));
+  }
+
+  const handleChange = (e) => {
+   const {name, value} = e.target;
+   setClubData(prev => ({...prev, [name]: value}))
+  }
 
   return (
     <Container>
@@ -20,28 +33,32 @@ const CreateClub = () => {
           sx={{ "& > :not(style)": { m: 1, width: "40ch" } }}
           noValidate
           autoComplete="off"
+          onSubmit={handleSubmit} // review this
         >
           <TextField
             id="outlined-basic"
             label="Name of the club"
             variant="outlined"
-            value={clubName}
-            onChange={(e) => setClubName(e.target.value)}
-          />
+            name="clubName"
+            value={clubData.clubName}
+            onChange={handleChange}
+            />
           <TextField
             id="outlined-basic"
-            label="Club manager's name"
+            label="Club description"
             variant="outlined"
-            value={managerName}
-            onChange={(e) => setManagerName(e.target.value)}
-          />
+            name="clubDescription"
+            value={clubData.clubDescription}
+            onChange={handleChange}
+            />
           <TextField
             id="outlined-basic"
-            label="Club manager's email"
+            label="Club image url"
             variant="outlined"
-            value={managerEmail}
-            onChange={(e) => setManagerEmail(e.target.value)}
-          />
+            name="clubImage"
+            value={clubData.clubImage}
+            onChange={handleChange}
+            />
           <br />
           <Button
             style={{
@@ -53,7 +70,8 @@ const CreateClub = () => {
               fontSize: "12px",
             }}
             variant="contained"
-          >
+            type="submit"
+            >
             Submit
           </Button>
         </Box>
