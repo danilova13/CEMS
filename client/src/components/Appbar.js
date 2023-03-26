@@ -18,7 +18,7 @@ import useAuth from '../hooks/useAuth';
 
 
 const drawerWidth = 240;
-const navItems = ['Admin', 'Manager', 'Clubs'];
+const navItems = ['Admin', 'Manager', 'Club'];
 
 export default function DrawerAppBar(props) {
   const { window } = props;
