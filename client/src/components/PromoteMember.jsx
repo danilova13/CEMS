@@ -50,9 +50,7 @@ React.useEffect(() => {
         throw new Error("invalid input");
       })
       .then((data) => {
-        console.log(111, data);
         setDbMembers(prev => data)
-        console.log(222, dbMembers);
       })
       .catch((err) => {
         console.log(err);
@@ -69,17 +67,14 @@ React.useEffect(() => {
         throw new Error("invalid input");
       })
       .then((data) => {
-        console.log(333, data);
         setDbClubs(prev => data)
-        console.log(444, dbClubs);
       })
       .catch((err) => {
         console.log(err);
       });
 
-
   return () => {
-    
+
   }
 }, [])
 
@@ -91,9 +86,9 @@ React.useEffect(() => {
     e.preventDefault();
     console.log(111, JSON.stringify(values));
 
-    fetch("http://localhost:8080/users/promote", {
-      //review this line
-      method: "POST",
+    //Add correct endpoint below
+    fetch("http://localhost:8080/users/promote", {//review this line
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     })
@@ -149,7 +144,6 @@ React.useEffect(() => {
               MenuProps={MenuProps}
             >
               {dbClubs.map((club) => (
-                // console.log(525, club)
                 <MenuItem
                   key={club.nameClub}
                   value={club.nameClub}
