@@ -1,12 +1,12 @@
 package com.algoma.cems.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Event {
@@ -19,6 +19,10 @@ public class Event {
     private String locationEvent;
     private int costEvent;
     private String eventDescription;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "attendingEvent")
+    private Set<User> userAttending = new HashSet<>();
 
 
     public Event() {
@@ -84,8 +88,15 @@ public class Event {
     public String getEventDescription() {
         return eventDescription;
     }
-
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }
+
+    public Set<User> getUserAttending() {
+        return userAttending;
+    }
+    public void setUserAttending(Set<User> userAttending) {
+        this.userAttending = userAttending;
+    }
+
 }

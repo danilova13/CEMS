@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface ClubRepository extends JpaRepository<Club,Integer> {
     void deleteAll();
+
 }
 
