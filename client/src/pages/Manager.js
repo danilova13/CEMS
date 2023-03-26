@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import CreateEvent from "../components/CreateEvent";
 import EditClub from "../components/EditClub";
+import Reports from "../components/Reports";
+import Requests from "../components/Requests";
 
 const Manager = () => {
   const style = {
@@ -21,6 +23,8 @@ const Manager = () => {
 
   const [showEvent, setShowEvent] = useState(false);
   const [showClub, setShowClub] = useState(false);
+  const [showRequests, setShowRequests] = useState(false);
+  const [showReports, setShowReports] = useState(false);
 
   const clubModalHandleClick = () => {
 		setShowClub(prev => !prev)
@@ -30,11 +34,21 @@ const Manager = () => {
 		setShowEvent(prev => !prev)
   }
 
+  const requestsModalHandleClick = () => {
+		setShowRequests(prev => !prev)
+  }
+
+  const reportsModalHandleClick = () => {
+		setShowReports(prev => !prev)
+  }
+
   return (
     <div>
-      <div className="flex justify-around w-42 h-150 mt-24">
-      <Button className="!bg-[#FC9F26] !font-bold" onClick={clubModalHandleClick} variant="contained" size="large" >Edit clubs</Button>
-      <Button className="!bg-[#FC9F26] !font-bold" onClick={eventModalHandleClick} variant="contained" size="large">Create Events</Button>
+      <div className="grid grid-cols-2 gap-x-10 gap-y-10 w-42 h-150 mt-24">
+      <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={clubModalHandleClick} variant="contained" size="large" >Edit clubs</Button>
+      <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={eventModalHandleClick} variant="contained" size="large">Create Events</Button>
+      <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={requestsModalHandleClick} variant="contained" size="large">Pending requests</Button>
+      <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={reportsModalHandleClick} variant="contained" size="large">Financial reports</Button>
       </div>
       <Modal
         open={showClub}
@@ -54,6 +68,26 @@ const Manager = () => {
       >
         <Box>
 					<CreateEvent eventModalHandleClick={eventModalHandleClick}></CreateEvent>
+        </Box>
+      </Modal>
+      <Modal
+        open={showRequests}
+        onClose={requestsModalHandleClick}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+					<Requests requestsModalHandleClick={requestsModalHandleClick}></Requests>
+        </Box>
+      </Modal>
+      <Modal
+        open={showReports}
+        onClose={reportsModalHandleClick}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+					<Reports reportsModalHandleClick={reportsModalHandleClick}></Reports>
         </Box>
       </Modal>
     </div>
