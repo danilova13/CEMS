@@ -11,8 +11,34 @@ import Select from '@mui/material/Select';
 
 const EditClub = ({clubModalHandleClick}) => {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
+ 
   const defaultData = {nameClub: "", clubDescription: "", imageString: "",};
   const [clubData, setClubData] = useState(defaultData);
+  const [club, setClub] = useState({});
+  const[dbClubs, setDbClubs] = useState([]);
+
+  React.useEffect(() => {
+    fetch("http://localhost:8080/clubs/", { //review this line
+        method: "GET",
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+  
+          throw new Error("invalid input");
+        })
+        .then((data) => {
+          setDbClubs(prev => data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  
+    return () => {
+  
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,22 +74,26 @@ const EditClub = ({clubModalHandleClick}) => {
   return (
     <Container>
       <Paper elevation={3} style={paperStyle}>
-      <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
+      <FormControl sx={{ m: 1, minWidth: 532 }}>
+        <InputLabel id="club">Select a club to edit</InputLabel>
         <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          value={age}
+          labelId="Select a club to edit"
+          id="club"
+          value={club.nameClub}
           onChange={handleChange}
-          autoWidth
-          label="Age"
+          label="Select a club to edit"
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Twenty</MenuItem>
-          <MenuItem value={21}>Twenty one</MenuItem>
-          <MenuItem value={22}>Twenty one and a half</MenuItem>
+          {dbClubs.map((club) => (
+                <MenuItem
+                  key={club.nameClub}
+                  value={club.nameClub}
+                >
+                  {club.nameClub}
+                </MenuItem>
+              ))}
         </Select>
       </FormControl>
         <Box
