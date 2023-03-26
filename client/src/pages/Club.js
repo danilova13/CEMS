@@ -1,6 +1,8 @@
+import EventCarousel from "../components/EventCarousel";
+
 const Club = () => {
 	return ( 
-		<h1> Club Page</h1>
+		<EventCarousel></EventCarousel>
 	 );
 }
  
