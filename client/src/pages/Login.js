@@ -71,8 +71,9 @@ export default function Login() {
 				onChange={(e) => setPassword(e.target.value)}
 				/> <br/>
 				
-				<Button onClick={handleSubmit}  style={{maxWidth: '60px', maxHeight:'40px', backgroundColor: '#d3d3d3', color: '#003366', 
-					fontWeight: 'bold', fontSize: '12px'}} 
+				<Button onClick={handleSubmit}  
+						style={{maxWidth: '60px', maxHeight:'40px', backgroundColor: '#d3d3d3', color: '#003366', 
+						fontWeight: 'bold', fontSize: '12px'}} 
 					variant="contained">Submit</Button>
 
 			 	{errorMsg && (<div className="popuptext"><p className="error"> {errorMsg}</p> </div>)} 

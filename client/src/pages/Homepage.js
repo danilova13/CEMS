@@ -6,10 +6,11 @@ import ClubList from "../components/ClubList";
 const Homepage = () => {
 	return (  
 	<div>
-		<MyClubs />
 
 		<ClubList />
 
+		<MyClubs />
+		
 	</div>
 	
 		

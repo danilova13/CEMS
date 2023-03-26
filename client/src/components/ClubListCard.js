@@ -9,8 +9,47 @@ import { ButtonGroupProps } from '@mui/material';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
+import {Modal} from '@mui/material';
+import { Container, Paper } from "@mui/material";
+import SignUpForm from './SignUpForm';
+import Box from "@mui/material/Box";
+import { useState } from 'react';
+import useAuth from '../hooks/useAuth';
+
+
 
 export default function ClubListCard({club}){
+
+	const [ showSignUpForm, setShowSignUpForm ] = useState(false);
+	const displaySignUpForm = () => {
+		setShowSignUpForm(true);
+	}
+	const hideSignUpForm = () => setShowSignUpForm(false);
+
+	const { auth, setAuth } = useAuth();
+	
+	const onSubmit = (e) => {
+		e.preventDefault();
+		console.log('You successfully signed up for a club');
+
+		fetch(`http://localhost:8080/users/${auth.id}/clubs/${club.idClub}`, {
+			method: "PUT",
+			headers: {"Content-Type": "application/json"}
+		})
+		.then((res) => {
+			if(res.ok) {
+				return res.json();
+			}
+			throw new Error('Failed to sign up');
+		})
+		.then((data) => {
+			console.log(data);
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+	}
+
 	return ( 
 		<Card sx={{ minWidth: 345 }}>
 		 <CardHeader
@@ -20,13 +59,13 @@ export default function ClubListCard({club}){
           </Avatar>
         }
 		titleTypographyProps={{variant:'h6', fontWeight: 'bold' }}
-        title={club.clubName}
+        title={club.nameClub}
         subheader=""
      	 />
 
 		<CardMedia
 		  sx={{ minHeight: 260 }}
-		  image={require(`../images/${club.clubImage}`)}
+		  image={require(`../images/${club.imageString.trim()}`)}
 		  title="club_image"
 		/>
 		<CardContent>
@@ -34,9 +73,26 @@ export default function ClubListCard({club}){
 			{club.clubDescription}
 		  </Typography>
 		</CardContent>
-		<CardActions>
-		  <Button size="small" sx={{color: '#dd2c00', fontWeight: 'bold'}}>Sign Up</Button>
+
+		<CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
+		  <Button 
+			className=""
+			onClick={displaySignUpForm} 
+			size="small" sx={{color: '#dd2c00', fontWeight: 'bold',buttonAlign: 'center'}}
+		>
+			Sign Up
+		</Button>
 		</CardActions>
+		<Modal
+			open={showSignUpForm}
+			onClose={hideSignUpForm}
+			aria-labelledby="modal-modal-title"
+			aria-describedby="modal-modal-description"
+      	>
+        <Box>
+			<SignUpForm onClose={hideSignUpForm} onSubmit={onSubmit} clubId={club.idClub}/>
+        </Box>
+      </Modal>
 	  </Card>
 	);
   }
