@@ -14,8 +14,13 @@ const EditClub = ({clubModalHandleClick}) => {
  
   const defaultData = {nameClub: "", clubDescription: "", imageString: "",};
   const [clubData, setClubData] = useState(defaultData);
-  const [club, setClub] = useState({});
+
+  
+  const [club, setClub] = useState("");
   const[dbClubs, setDbClubs] = useState([]);
+  const selectedClub = dbClubs.find(dbClub => dbClub.nameClub == club);
+  
+  console.log(111, selectedClub);
 
   React.useEffect(() => {
     fetch("http://localhost:8080/clubs/", { //review this line
@@ -29,6 +34,7 @@ const EditClub = ({clubModalHandleClick}) => {
           throw new Error("invalid input");
         })
         .then((data) => {
+          console.log(121, data);
           setDbClubs(prev => data)
         })
         .catch((err) => {
@@ -79,8 +85,9 @@ const EditClub = ({clubModalHandleClick}) => {
         <Select
           labelId="Select a club to edit"
           id="club"
-          value={club.nameClub}
-          onChange={handleChange}
+          name="clubName"
+          value={club}
+          onChange={(e) => setClub(e.target.value)}
           label="Select a club to edit"
         >
           <MenuItem value="">
@@ -105,7 +112,7 @@ const EditClub = ({clubModalHandleClick}) => {
         >
           <TextField
             id="outlined-basic"
-            label="Name of the club"
+            label={selectedClub.nameClub|| "Name of the club"}
             variant="outlined"
             name="nameClub"
             value={clubData.nameClub}
@@ -113,7 +120,7 @@ const EditClub = ({clubModalHandleClick}) => {
             />
           <TextField
             id="outlined-basic"
-            label="Club description"
+            label={selectedClub.clubDescription|| "Club description"}
             variant="outlined"
             name="clubDescription"
             value={clubData.clubDescription}
@@ -121,7 +128,7 @@ const EditClub = ({clubModalHandleClick}) => {
             />
           <TextField
             id="outlined-basic"
-            label="Club image url"
+            label={selectedClub.imageString|| "Club image url"}
             variant="outlined"
             name="imageString"
             value={clubData.imageString}
