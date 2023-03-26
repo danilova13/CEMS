@@ -24,36 +24,39 @@ const Admin = () => {
 
   const [showClub, setShowClub] = useState(false);
   const [showMember, setShowMember] = useState(false);
-  const displayClubModal = () => setShowClub(true);
-  const hideClubModal = () => setShowClub(false);
 
-  const displayMemberModal = () => setShowMember(true);
-  const hideMemberModal = () => setShowMember(false);
+  const clubModalHandleClick = () => {
+    setShowClub(prev => !prev)
+  }
+
+  const memberModalHandleClick = () => {
+    setShowMember(prev => !prev)
+  }
 
   return (
     <div>
       <div className="flex justify-around w-42 h-150 mt-24">
-      <Button className="" onClick={displayClubModal} variant="contained" size="large" >Create club</Button>
-      <Button onClick={displayMemberModal} variant="contained" size="large">Promote club members</Button>
+      <Button className="" onClick={clubModalHandleClick} variant="contained" size="large" >Create club</Button>
+      <Button onClick={memberModalHandleClick} variant="contained" size="large">Promote club members</Button>
       </div>
       <Modal
         open={showClub}
-        onClose={hideClubModal}
+        onClose={clubModalHandleClick}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <CreateClub></CreateClub>
+          <CreateClub clubModalHandleClick={clubModalHandleClick}></CreateClub>
         </Box>
       </Modal>
       <Modal
         open={showMember}
-        onClose={hideMemberModal}
+        onClose={memberModalHandleClick}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box>
-         <PromoteMember></PromoteMember>
+         <PromoteMember memberModalHandleClick={memberModalHandleClick}></PromoteMember>
         </Box>
       </Modal>
     </div>

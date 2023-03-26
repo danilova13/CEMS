@@ -6,11 +6,8 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import { AdminPanelSettings } from "@mui/icons-material";
 
-const CreateClub = () => {
+const CreateClub = ({clubModalHandleClick}) => {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
-  // const [clubName, setClubName] = useState("");
-  // const [clubDescription, setClubDescription] = useState("");
-  // const [clubImage, setclubImage] = useState("");
   const defaultData = {nameClub: "", clubDescription: "", imageString: "",};
   const [clubData, setClubData] = useState(defaultData);
 
@@ -36,6 +33,8 @@ const CreateClub = () => {
 		.catch((err) => {
 			console.log(err);
 		})
+
+    clubModalHandleClick()
   }
 
   const handleChange = (e) => {
