@@ -11,13 +11,31 @@ const CreateClub = () => {
   // const [clubName, setClubName] = useState("");
   // const [clubDescription, setClubDescription] = useState("");
   // const [clubImage, setclubImage] = useState("");
-  const defaultData = {clubName: "", clubDescription: "", clubImage: "",};
+  const defaultData = {nameClub: "", clubDescription: "", imageString: "",};
   const [clubData, setClubData] = useState(defaultData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setClubData(e)
     console.log(111,JSON.stringify(clubData));
+
+    fetch("http://localhost:8080/clubs/",{
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify(clubData)
+		})
+		.then ((res) => {
+			if (res.ok) {
+				return res.json();
+			}
+
+			throw new Error("invalid input");
+		})
+		.then((data) => {
+			console.log(data);
+		})
+		.catch((err) => {
+			console.log(err);
+		})
   }
 
   const handleChange = (e) => {
@@ -33,14 +51,14 @@ const CreateClub = () => {
           sx={{ "& > :not(style)": { m: 1, width: "40ch" } }}
           noValidate
           autoComplete="off"
-          onSubmit={handleSubmit} // review this
+          onSubmit={handleSubmit}
         >
           <TextField
             id="outlined-basic"
             label="Name of the club"
             variant="outlined"
-            name="clubName"
-            value={clubData.clubName}
+            name="nameClub"
+            value={clubData.nameClub}
             onChange={handleChange}
             />
           <TextField
@@ -55,8 +73,8 @@ const CreateClub = () => {
             id="outlined-basic"
             label="Club image url"
             variant="outlined"
-            name="clubImage"
-            value={clubData.clubImage}
+            name="imageString"
+            value={clubData.imageString}
             onChange={handleChange}
             />
           <br />
