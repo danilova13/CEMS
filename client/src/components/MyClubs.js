@@ -12,7 +12,7 @@ const MyClubs = () => {
 	const { auth } = useAuth();
 
 	useEffect(() => {
-		fetch(`http://localhost:8000/users/${auth.id}/clubs`)
+		fetch(`http://localhost:8080/users/${auth.id}/clubs`)
 			.then(res => res.json())
 			.then(data => setClubs(data))
 	}, [])
@@ -23,7 +23,7 @@ const MyClubs = () => {
 
 			<Grid container spacing={2}>
 				{clubs.map(club => (
-					<Grid item key={club.clubId} xs={12} sm={6} md={4} lg={3}> 
+					<Grid item key={club.idClub} xs={12} sm={6} md={4} lg={3}> 
 						<ClubCard club={club}/>
 					</Grid>
 				))}

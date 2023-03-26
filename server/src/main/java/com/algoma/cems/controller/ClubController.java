@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/clubs")
+@CrossOrigin
 public class ClubController {
     @Autowired
     private ClubService clubService;

@@ -8,18 +8,8 @@ import { AdminPanelSettings } from "@mui/icons-material";
 import { Close } from '@mui/icons-material';
 
 
-const SignUpForm = ({ onClose }) => {
-
+const SignUpForm = ({ onClose, onSubmit }) => {
 	const paperStyle = { padding: "50px 20px", width: 400, margin: "20px auto", boxShadow: 'none'};
-	// const [ firstName, setFirstName ] = useState();
-	// const [ lastName, setLastName ] = useState();
-	// const [ email, setEmail ] = useState();
-
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log('You successfully signed up for a club');
-	}
 	
 	return (  
 		<Container>
@@ -29,7 +19,7 @@ const SignUpForm = ({ onClose }) => {
 				sx={{ "& > :not(style)": { m: 1, width: "40ch" } }}
 				noValidate
 				autoComplete="off"
-				onSubmit={handleSubmit}
+				onSubmit={onSubmit}
 			>
 				 <IconButton 
 				 	sx={{ position: 'absolute', top: '10px', right: '10px'}} 
@@ -41,22 +31,9 @@ const SignUpForm = ({ onClose }) => {
 						Press Sign Up button to successfuly join the club 
 					</Typography>
 				</Typography>
-				{/* <TextField
-					id="outlined-basic"
-					label="Last Name"
-					variant="outlined"
-					value={lastName}
-					onChange={(e) => setLastName(e.target.value)}
-				/>
-				<TextField
-					id="outlined-basic"
-					label="Email"
-					variant="outlined"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/> */}
 				<br />
 				<Button
+					onClick={onSubmit}
 					type="submit"
 					style={{
 						minWidth: "60px",

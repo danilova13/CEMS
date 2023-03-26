@@ -10,7 +10,7 @@ const ClubCarousel = () => {
   const [ clubs, setClubs] = useState([]);
   
   useEffect(() => {
-    fetch(`http://localhost:8000/clubs`)
+    fetch(`http://localhost:8080/clubs/`)
       .then(res => res.json())
       .then(data => setClubs(data))
   }, [])
@@ -24,14 +24,10 @@ const ClubCarousel = () => {
         newButtonsAlwaysVisible={true}
         duration={1500}
       >
-         {clubs.map(club => (
-            <Grid container justifyContent="center">
-              <Grid item key={clubs.clubId}> 
-                <ClubListCard className="h-[50vh] w-full rounded-lg shadow-xl" club={club}/>
-              </Grid>
-            </Grid>
-          ))}
-          
+         {clubs.map(club => {
+                console.log(club.clubId);
+                return <ClubListCard key={club.idClub} className="h-[50vh] w-full rounded-lg shadow-xl" club={club}/>
+         })}
        
       </Carousel>
     </div>

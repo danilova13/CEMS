@@ -53,14 +53,14 @@ export default function RecipeReviewCard( {club}) {
         }
     
 		    titleTypographyProps={{variant:'h6', fontWeight: 'bold' }}
-        title={club.clubName}
+        title={club.nameClub}
         subheader=""
       />
 
       <CardMedia
         component="img"
         height="194"
-        image={require(`../images/${club.clubImage}`)}
+        image={require(`../images/${club.imageString}`)}
         alt="club_image"
       />
 
