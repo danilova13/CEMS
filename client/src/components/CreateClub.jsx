@@ -81,8 +81,8 @@ const CreateClub = ({clubModalHandleClick}) => {
             style={{
               maxWidth: "60px",
               maxHeight: "40px",
-              backgroundColor: "#d3d3d3",
-              color: "#003366",
+              backgroundColor: "#FC9F26",
+              color: "#fffff",
               fontWeight: "bold",
               fontSize: "12px",
             }}

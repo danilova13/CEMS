@@ -36,8 +36,8 @@ const Admin = () => {
   return (
     <div>
       <div className="flex justify-around w-42 h-150 mt-24">
-      <Button className="" onClick={clubModalHandleClick} variant="contained" size="large" >Create club</Button>
-      <Button onClick={memberModalHandleClick} variant="contained" size="large">Promote club members</Button>
+      <Button className="!bg-[#FC9F26] !font-bold" onClick={clubModalHandleClick} variant="contained" size="large" >Create club</Button>
+      <Button className="!bg-[#FC9F26] !font-bold" onClick={memberModalHandleClick} variant="contained" size="large">Promote club members</Button>
       </div>
       <Modal
         open={showClub}
