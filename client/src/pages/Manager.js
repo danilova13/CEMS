@@ -33,8 +33,8 @@ const Manager = () => {
   return (
     <div>
       <div className="flex justify-around w-42 h-150 mt-24">
-      <Button className="!bg-[#FC9F26] !font-bold" onClick={clubModalHandleClick} variant="contained" size="large" >Edit club</Button>
-      <Button className="!bg-[#FC9F26] !font-bold" onClick={eventModalHandleClick} variant="contained" size="large">Create Event</Button>
+      <Button className="!bg-[#FC9F26] !font-bold" onClick={clubModalHandleClick} variant="contained" size="large" >Edit clubs</Button>
+      <Button className="!bg-[#FC9F26] !font-bold" onClick={eventModalHandleClick} variant="contained" size="large">Create Events</Button>
       </div>
       <Modal
         open={showClub}

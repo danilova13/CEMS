@@ -4,6 +4,10 @@ import TextField from "@mui/material/TextField";
 import { Container, Paper } from "@mui/material";
 import { useState } from "react";
 import Button from "@mui/material/Button";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const EditClub = ({clubModalHandleClick}) => {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
@@ -44,6 +48,24 @@ const EditClub = ({clubModalHandleClick}) => {
   return (
     <Container>
       <Paper elevation={3} style={paperStyle}>
+      <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-autowidth-label"
+          id="demo-simple-select-autowidth"
+          value={age}
+          onChange={handleChange}
+          autoWidth
+          label="Age"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Twenty</MenuItem>
+          <MenuItem value={21}>Twenty one</MenuItem>
+          <MenuItem value={22}>Twenty one and a half</MenuItem>
+        </Select>
+      </FormControl>
         <Box
           component="form"
           sx={{ "& > :not(style)": { m: 1, width: "40ch" } }}
