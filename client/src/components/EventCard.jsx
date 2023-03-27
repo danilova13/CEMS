@@ -7,25 +7,22 @@ import Typography from "@mui/material/Typography";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
+import useAuth from '../hooks/useAuth';
 
-const eventCard = ({ event }) => {
+const EventCard = ({ event }) => {
   let count = 0;
-  const paid = true;
+  const { auth, setAuth } = useAuth();
 
   const handleClick = (e) => {
-    // change below endpoint after fixing backend controller
-    // could replace with get request and modify logic in controller
     if (count < 1) {
-      fetch("http://localhost:8080/events/", {
-        method: "POST",
+      fetch(`http://localhost:8080/users/${auth.id}/events/${event.idEvent}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(paid),
       })
         .then((res) => {
           if (res.ok) {
             return res.json();
           }
-
           throw new Error("invalid input");
         })
         .then((data) => {
@@ -79,4 +76,4 @@ const eventCard = ({ event }) => {
   );
 };
 
-export default eventCard;
+export default EventCard;

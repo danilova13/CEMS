@@ -58,7 +58,7 @@ const EditClub = ({clubModalHandleClick}) => {
     e.preventDefault();
     // console.log(111,JSON.stringify(clubData));
 
-    fetch("http://localhost:8080/clubs/",{
+		fetch(`http://localhost:8080/clubs/${selectedClub.idClub}`, {
 			method: "PUT",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify(clubData)
