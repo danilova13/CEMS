@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Requests = () => {
+const EditMembers = () => {
   return (
     <div>Requests</div>
   )
 }
 
-export default Requests
+export default EditMembers
