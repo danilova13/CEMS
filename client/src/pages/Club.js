@@ -20,7 +20,7 @@ const Club = () => {
 	return ( 
 		<div className="flex justify-between">
 {/* <Card sx={{ maxWidth: 500 }}> */}
-<Card className="flex flex-col justify-around !w-[50%] !h-[70vh]">
+<Card className="ml-5 flex flex-col justify-around !w-[50%] !h-[70vh]">
 		 <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500], fontSize: 10, fontWeight: 'bold'}} aria-label="clubs">
