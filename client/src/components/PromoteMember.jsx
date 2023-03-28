@@ -83,24 +83,24 @@ const PromoteMember = ({ memberModalHandleClick }) => {
 
   React.useEffect(() => {
     const foundmember = dbMembers.find(
-      (dbmember) => dbmember.first_Name == member
+      (dbmember) => dbmember.first_Name == values.member[0]
     );
     setSelectedMember((prev) => foundmember);
-    // console.log(222, selectedMember);
+    console.log(222, selectedMember);
 
     return () => {};
   }, [member, setMember]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(111, JSON.stringify(values));
+    console.log(111, values.members[0]);
 
     //Add correct endpoint below
     fetch(`http://localhost:8080/users/`, {
       //review this line
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values.members),
+      // body: JSON.stringify(values.members),
     })
       .then((res) => {
         if (res.ok) {
