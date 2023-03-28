@@ -1,12 +1,14 @@
 package com.algoma.cems.controller;
 
 import com.algoma.cems.model.Club;
+import com.algoma.cems.model.User;
 import com.algoma.cems.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/clubs")
@@ -41,5 +43,9 @@ public class ClubController {
     public ResponseEntity<String> deleteAllClubs(){
         clubService.deleteAllClubs();
         return ResponseEntity.ok("All clubs deleted");
+    }
+    @GetMapping("/{idClub}/users")
+    public Set<User> listOfUsers(@PathVariable int idClub){
+        return clubService.getUsersAttendingEvent(idClub);
     }
 }
