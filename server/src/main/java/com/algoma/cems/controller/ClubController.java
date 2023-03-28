@@ -49,7 +49,7 @@ public class ClubController {
         return clubService.getUsersEnrolledInClub(idClub);
     }
     @PutMapping("/{idClub}/events/{idEvent}")
-    private Club listOfEventsInClub(
+    public Club listOfEventsInClub(
             @PathVariable int idClub,
             @PathVariable int idEvent
     ){
