@@ -75,13 +75,13 @@ export default function ClubListCard({club}){
 		</CardContent>
 
 		<CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
-		  <Button 
-			className=""
-			onClick={displaySignUpForm} 
-			size="small" sx={{color: '#dd2c00', fontWeight: 'bold',buttonAlign: 'center'}}
-		>
-			Sign Up
-		</Button>
+			<Button 
+				className=""
+				onClick={displaySignUpForm} 
+				size="small" sx={{color: '#dd2c00', fontWeight: 'bold',buttonAlign: 'center'}}
+			>
+				Sign Up
+			</Button>
 		</CardActions>
 		<Modal
 			open={showSignUpForm}
@@ -89,10 +89,10 @@ export default function ClubListCard({club}){
 			aria-labelledby="modal-modal-title"
 			aria-describedby="modal-modal-description"
       	>
-        <Box>
-			<SignUpForm onClose={hideSignUpForm} onSubmit={onSubmit} clubId={club.idClub}/>
-        </Box>
-      </Modal>
+			<Box>
+				<SignUpForm onClose={hideSignUpForm} onSubmit={onSubmit} clubId={club.idClub}/>
+			</Box>
+      	</Modal>
 	  </Card>
 	);
   }
