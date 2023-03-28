@@ -10,18 +10,15 @@ import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import LeaveClubForm from './LeaveClubForm';
 import useAuth from '../hooks/useAuth';
 import { useState } from 'react';
-import { ButtonGroupProps } from '@mui/material';
 import { Modal} from '@mui/material';
 import Box from "@mui/material/Box";
+import { Link } from 'react-router-dom';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -83,6 +80,7 @@ export default function RecipeReviewCard( {club}) {
   return (
     <Card sx={{ maxWidth: 300, minHeight: 350}}>
 
+<Link to={`/club?id=${club.idClub}`}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500], fontSize: 10, fontWeight: 'bold'}} aria-label="clubs">
@@ -94,6 +92,7 @@ export default function RecipeReviewCard( {club}) {
         title={club.nameClub}
         subheader=""
       />
+      </Link>
 
 <CardMedia
         sx={{ minHeight: 300 }}
