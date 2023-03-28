@@ -60,7 +60,7 @@ export default function RecipeReviewCard( {club}) {
       <CardMedia
         component="img"
         height="194"
-        image={require(`../images/${club.imageString}`)}
+        image={require(`../images/${club.imageString.trim()}`)}
         alt="club_image"
       />
 
@@ -90,6 +90,7 @@ export default function RecipeReviewCard( {club}) {
           <Typography paragraph>
            {club.clubDescription}
           </Typography>
+
         </CardContent>
       </Collapse>
     </Card>

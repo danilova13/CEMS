@@ -25,7 +25,6 @@ const ClubCarousel = () => {
         duration={1500}
       >
          {clubs.map(club => {
-                console.log(club.clubId);
                 return <ClubListCard key={club.idClub} className="h-[50vh] w-full rounded-lg shadow-xl" club={club}/>
          })}
        
