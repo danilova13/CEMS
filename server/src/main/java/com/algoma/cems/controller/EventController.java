@@ -2,12 +2,14 @@ package com.algoma.cems.controller;
 
 import com.algoma.cems.model.Club;
 import com.algoma.cems.model.Event;
+import com.algoma.cems.model.User;
 import com.algoma.cems.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/events")
@@ -38,6 +40,11 @@ public class EventController {
     public ResponseEntity<String> deleteAllEvents(){
         eventService.deleteAllEvents();
         return ResponseEntity.ok("All events deleted");
+    }
+
+    @GetMapping("/{idEvent}/users")
+    public Set<User> listOfUsers(@PathVariable int idEvent){
+        return eventService.getUsersAttendingEvent(idEvent);
     }
 
 }
