@@ -57,7 +57,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         entityManager.createNativeQuery(sqlClubs).executeUpdate();
 
         String sqlEvents = "ALTER TABLE event AUTO_INCREMENT = 1";
-        entityManager.createNativeQuery(sqlClubs).executeUpdate();
+        entityManager.createNativeQuery(sqlEvents).executeUpdate();
 
         userController.add(new User("Jimmy Phan", "Student1@algomau.ca", "Student1", "student"));
         userController.add(new User("Anna D", "Student2@algomau.ca", "Student2", "student"));
