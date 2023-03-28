@@ -3,6 +3,8 @@ package com.algoma.cems.controller;
 import com.algoma.cems.model.Club;
 import com.algoma.cems.model.Event;
 import com.algoma.cems.model.User;
+import com.algoma.cems.service.ClubService;
+import com.algoma.cems.service.EmailSenderService;
 import com.algoma.cems.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,18 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private EmailSenderService emailSenderService;
+    @Autowired
+    private ClubService clubService;
 
     @PostMapping("/")
     public String add(@RequestBody Event event){
         eventService.saveEvent(event);
-        return "Event Saved :" + event.getNameEvent();
+            if (event.getIdEvent() > 10) {
+                    emailSenderService.sendEmail("jphan@algomau.ca", event.getNameEvent(), event.getEventDescription());
+            }
+        return "Event Saved : " + event.getNameEvent();
     }
 
     @GetMapping("/")

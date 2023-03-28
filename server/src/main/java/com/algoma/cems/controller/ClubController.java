@@ -46,7 +46,7 @@ public class ClubController {
     }
     @GetMapping("/{idClub}/users")
     public Set<User> listOfUsers(@PathVariable int idClub){
-        return clubService.getUsersAttendingEvent(idClub);
+        return clubService.getUsersEnrolledInClub(idClub);
     }
     @PutMapping("/{idClub}/events/{idEvent}")
     private Club listOfEventsInClub(
