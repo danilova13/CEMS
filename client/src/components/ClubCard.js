@@ -15,7 +15,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-
+import { Link } from 'react-router-dom';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -45,6 +45,7 @@ export default function RecipeReviewCard( {club}) {
   return (
     <Card sx={{ maxWidth: 230, minHeight: 350}}>
 
+      <Link to={`/club?id=${club.idClub}`}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500], fontSize: 10, fontWeight: 'bold'}} aria-label="clubs">
@@ -56,7 +57,7 @@ export default function RecipeReviewCard( {club}) {
         title={club.nameClub}
         subheader=""
       />
-
+      </Link>
       <CardMedia
         component="img"
         height="194"
