@@ -129,9 +129,6 @@ export default function RecipeReviewCard( {club}) {
           <Typography paragraph>
            {club.clubDescription}
           </Typography>
-<<<<<<< Updated upstream
-
-=======
         
           <CardActions>
             <Button
@@ -150,7 +147,6 @@ export default function RecipeReviewCard( {club}) {
             <LeaveClubForm onClose={hideLeaveClubForm} onSubmit={onSubmit} clubId={club.idClub}/>
           </Box>
         </Modal>
->>>>>>> Stashed changes
         </CardContent>
       </Collapse>
     </Card>
