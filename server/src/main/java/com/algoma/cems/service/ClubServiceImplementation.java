@@ -4,6 +4,7 @@ import com.algoma.cems.model.Club;
 import com.algoma.cems.model.Event;
 import com.algoma.cems.model.User;
 import com.algoma.cems.repository.ClubRepository;
+import com.algoma.cems.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,9 @@ import java.util.Set;
 public class ClubServiceImplementation implements ClubService{
     @Autowired
     private ClubRepository clubRepository;
+
+    @Autowired
+    private EventRepository eventRepository;
 
     @Override
     public Club saveClub(Club club) {
@@ -41,5 +45,15 @@ public class ClubServiceImplementation implements ClubService{
     public Set<User> getUsersAttendingEvent(Integer idClub) {
         Club club = clubRepository.findById(idClub).get();
         return club.getEnrolledUsers();
+    }
+
+    public Club listOfEventsInClub(int idClub, int idEvent){
+        Set<Event> clubEventSet = null;
+        Club club = clubRepository.findById(idClub).get();
+        Event event = eventRepository.findById(idEvent).get();
+        clubEventSet = club.getClubevents();
+        clubEventSet.add(event);
+        club.setClubevents(clubEventSet);
+        return clubRepository.save(club);
     }
 }

@@ -48,4 +48,11 @@ public class ClubController {
     public Set<User> listOfUsers(@PathVariable int idClub){
         return clubService.getUsersAttendingEvent(idClub);
     }
+    @PutMapping("/{idClub}/events/{idEvent}")
+    private Club listOfEventsInClub(
+            @PathVariable int idClub,
+            @PathVariable int idEvent
+    ){
+        return clubService.listOfEventsInClub(idClub,idEvent);
+    }
 }
