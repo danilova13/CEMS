@@ -59,19 +59,19 @@ public class DatabaseSeeder implements CommandLineRunner {
         String sqlEvents = "ALTER TABLE event AUTO_INCREMENT = 1";
         entityManager.createNativeQuery(sqlEvents).executeUpdate();
 
-        userController.add(new User("Jimmy", "Phan", "Student1@algomau.ca", "Student1", "student"));
-        userController.add(new User("Anna", "D", "Student2@algomau.ca", "Student2", "student"));
-        userController.add(new User("Ahmed", "Elmolla", "CM1@algomau.ca", "CM1", "clubmanager"));
-        userController.add(new User("Cathy", "Tanya", "Admin1@algomau.ca", "Admin1", "admin"));
-        userController.add(new User("Lev", "On", "Admin2@algomau.ca", "Admin2", "admin"));
+        userController.add(new User("Jimmy Phan", "Student1@algomau.ca", "Student1", "student"));
+        userController.add(new User("Anna D", "Student2@algomau.ca", "Student2", "student"));
+        userController.add(new User("Ahmed Elmolla", "CM1@algomau.ca", "CM1", "clubmanager"));
+        userController.add(new User("Cathy Tanya", "Admin1@algomau.ca", "Admin1", "admin"));
+        userController.add(new User("Lev On", "Admin2@algomau.ca", "Admin2", "admin"));
 
-        clubController.add(new Club("Computer Science Club", "This is the Computer Science Club", "science.png "));
+        clubController.add(new Club("Computer Science Club", "This is the Computer Science Club", "science.png"));
         clubController.add(new Club("Photography Club", "This is the Photography Club", "photography.png"));
         clubController.add(new Club("Basketball Club", "This is the Basketball Club", "basketball.png"));
-        clubController.add(new Club("Chess Club", "This is the Chess Club", "chessclub.png "));
+        clubController.add(new Club("Chess Club", "This is the Chess Club", "chessclub.png"));
         clubController.add(new Club("Finance Club", "This is the Finance Club", "finance.png"));
         clubController.add(new Club("Rock Climbing Club", "This is the Rock Climbing Club", "rockclimbing.png"));
-        clubController.add(new Club("Winter Sports Club", "This is the Winter Sports Club", "wintersports.png "));
+        clubController.add(new Club("Winter Sports Club", "This is the Winter Sports Club", "wintersports.png"));
         clubController.add(new Club("Nature Club", "This is the Nature Club", "nature.png"));
         clubController.add(new Club("Scuba diving Club", "This is the Scuba Diving Club", "scuba.png"));
         clubController.add(new Club("Travel Club", "This is the Travel Club", "travel.png"));
