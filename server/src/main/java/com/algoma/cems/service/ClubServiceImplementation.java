@@ -56,4 +56,19 @@ public class ClubServiceImplementation implements ClubService{
         club.setClubevents(clubEventSet);
         return clubRepository.save(club);
     }
+
+    @Override
+    public String clubFinancials(int idClub) {
+        Set<Event> clubEvents = null;
+        Club club = clubRepository.findById(idClub).get();
+        clubEvents = club.getClubevents();
+        int revenue = 0;
+        for (Event event : clubEvents){
+            int costPer = event.getCostEvent();
+            int membersAttending = (int) event.getUserAttending().stream().count();
+            int temp = costPer * membersAttending;
+            revenue += temp;
+        }
+        return "The " + club.getNameClub() + " had " + clubEvents.stream().count() + " events that brought in " + revenue + "$";
+    }
 }

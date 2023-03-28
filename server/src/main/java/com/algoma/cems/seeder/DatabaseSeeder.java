@@ -90,11 +90,11 @@ public class DatabaseSeeder implements CommandLineRunner {
         for (int i = 1; i < 11; i++){
             clubController.listOfEventsInClub(i,i);
         }
-        // Student 1's clubs & events enrolled in
+        // Student 1's clubs enrolled in
         userController.userEnrolledInClub(1, 1);
         userController.userEnrolledInClub(1,3);
 
-        // Student 2's clubs & events enrolled in
+        // Student 2's clubs enrolled in
         userController.userEnrolledInClub(2,2);
         userController.userEnrolledInClub(2, 8);
     }

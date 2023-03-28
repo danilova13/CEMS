@@ -55,4 +55,9 @@ public class ClubController {
     ){
         return clubService.listOfEventsInClub(idClub,idEvent);
     }
+
+    @GetMapping("/{idClub}/financials")
+    public String clubFinancials(@PathVariable int idClub){
+        return clubService.clubFinancials(idClub);
+    }
 }
