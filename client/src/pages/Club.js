@@ -8,22 +8,19 @@ import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
 import EventCarousel from "../components/EventCarousel";
 import { useLocation } from "react-router-dom";
-import {useEffect, useState} from "react";
+import useAuth from '../hooks/useAuth';
 
 const Club = () => {
 	const search = useLocation().search;
 	const idClub = new URLSearchParams(search).get("id");
-	const [club, setClub] = useState({});
+	const {auth, setAuth} = useAuth();
 
-	useEffect(() => {
-    fetch(`http://localhost:8080/clubs/${idClub}`)
-      .then(res => res.json())
-      .then(data => setClub(prev => data))
-		}, [])
-		
+	const club = auth.enrolledClubs.find(club => club.idClub == idClub)
+
 	return ( 
-		<div>
-<Card sx={{ minWidth: 345 }}>
+		<div className="flex justify-between">
+{/* <Card sx={{ maxWidth: 500 }}> */}
+<Card className="ml-5 flex flex-col justify-around !w-[50%] !h-[70vh]">
 		 <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500], fontSize: 10, fontWeight: 'bold'}} aria-label="clubs">
@@ -34,26 +31,18 @@ const Club = () => {
         title={club?.nameClub}
         subheader=""
      	 />
-
-	{club ? (	<CardMedia
-		  sx={{ minHeight: 260 }}
+		<CardMedia
+		  sx={{ minHeight: 500 }}
 		  image={require(`../images/${club?.imageString}`)}
 		  title="club_image"
-		/>):
-	(	<CardMedia
-		  sx={{ minHeight: 260 }}
-			src={``}
-		  title="club_image"
-		/>)}
-
-		<img src={`../images/${club.imageString}`}></img>
+		/>
 		<CardContent>
 		  <Typography variant="body2" color="text.secondary">
 			{club?.clubDescription}
 		  </Typography>
 		</CardContent>
 	  </Card>
-			{/* <EventCarousel clubId={idClub}></EventCarousel> */}
+			<EventCarousel clubId={idClub}></EventCarousel>
 		</div>
 	 );
 }

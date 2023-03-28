@@ -8,15 +8,16 @@ const EventCarousel = ({clubId}) => {
   const [ events, setEvents] = useState([]);
   
   useEffect(() => {
-    fetch(`http://localhost:8080/clubs/${clubId}/events`)
+    // fetch(`http://localhost:8080/clubs/${clubId}/events`)
+    fetch(`http://localhost:8080/events/`)
       .then(res => res.json())
       .then(data => setEvents(prev => data))
   }, [])
   
   return (
-    <div className="w-full flex flex-col items-end">
+    <div className="w-[50%] flex flex-col items-end">
       <Carousel 
-        className="w-[50%] h-full"
+        className="w-full !max-h-[70vh]"
         animation="slide"
         newButtonsAlwaysVisible={true}
         duration={1500}
@@ -24,7 +25,7 @@ const EventCarousel = ({clubId}) => {
          {events.map(event => (
             <Grid item key={event.idEvent} container justifyContent="center">
               <Grid >
-                <EventCard className="max-h-[70vh] rounded-lg shadow-xl" event={event}></EventCard>
+                <EventCard className="!max-h-[70vh] rounded-lg shadow-xl" event={event}></EventCard>
               </Grid>
             </Grid>
           ))}

@@ -37,7 +37,7 @@ const EventCard = ({ event }) => {
   };
 
   return (
-    <Card sx={{ minWidth: 345 }}>
+    <Card sx={{ maxWidth: 400, height: 300 }}>
       <CardHeader
         avatar={
           <Avatar
