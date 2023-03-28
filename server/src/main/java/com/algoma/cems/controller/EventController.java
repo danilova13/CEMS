@@ -42,7 +42,6 @@ public class EventController {
         return ResponseEntity.ok("All events deleted");
     }
 
-
     @GetMapping("/{idEvent}/users")
     public Set<User> listOfUsers(@PathVariable int idEvent){
         return eventService.getUsersAttendingEvent(idEvent);
