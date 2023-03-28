@@ -9,7 +9,12 @@ import { Close } from '@mui/icons-material';
 
 
 const SignUpForm = ({ onClose, onSubmit }) => {
-	const paperStyle = { padding: "50px 20px", width: 400, margin: "20px auto", boxShadow: 'none'};
+	const paperStyle = { 
+		padding: "10px 10px", 
+		width: 400, margin: "100px auto", 
+		boxShadow: 'none', 
+		position: "relative"
+	};
 	
 	return (  
 		<Container>
@@ -22,13 +27,17 @@ const SignUpForm = ({ onClose, onSubmit }) => {
 				onSubmit={onSubmit}
 			>
 				 <IconButton 
-				 	sx={{ position: 'absolute', top: '10px', right: '10px'}} 
-					onClick={onClose} disableElevation disableRipple>
+				 	sx={{ position: 'absolute', 
+					top: '2px', right: '2px',
+					display:'flex', justifyContent: 'flex-end'
+				}} 
+					onClick={onClose} disableRipple>
            			 <Close />
 				</IconButton>
 				<Typography>
-					<Typography paragraph sx={{fontSize: 20, fontWeight:'bold'}}>
-						Press Sign Up button to successfuly join the club 
+					<Typography component={'div'} sx={{fontSize: 20, fontWeight:'bold'}}>
+						<br />
+						Press Sign Up button to join the club 
 					</Typography>
 				</Typography>
 				<br />
@@ -38,8 +47,8 @@ const SignUpForm = ({ onClose, onSubmit }) => {
 					style={{
 						minWidth: "60px",
 						minHeight: "40px",
-						backgroundColor: "#d3d3d3",
-						color: "#003366",
+						backgroundColor: "#FFAC1C",
+						color: "white",
 						fontWeight: "bold",
 						fontSize: "12px",
 					}}
