@@ -8,15 +8,16 @@ const EventCarousel = ({clubId}) => {
   const [ events, setEvents] = useState([]);
   
   useEffect(() => {
-    fetch(`http://localhost:8080/clubs/${clubId}/events`)
+    // fetch(`http://localhost:8080/clubs/${clubId}/events`)
+    fetch(`http://localhost:8080/events/`)
       .then(res => res.json())
       .then(data => setEvents(prev => data))
   }, [])
   
   return (
-    <div className="w-full flex flex-col items-end">
+    <div className="w-[50%] flex flex-col items-end">
       <Carousel 
-        className="w-[50%] h-full"
+        className="w-full h-full"
         animation="slide"
         newButtonsAlwaysVisible={true}
         duration={1500}
