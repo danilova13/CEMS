@@ -87,6 +87,9 @@ public class DatabaseSeeder implements CommandLineRunner {
         eventController.add(new Event("Scuba Diving Orientation", "Monday May 1, 2023", sqlTime , "Remote", 0, "Scuba Diving is among us lets get ready for a great season!"));
         eventController.add(new Event("Summer Plans", "Friday March 31, 2023", sqlTime , "Remote", 0, "Does anyone need a last minute partner? Come join and see who is going where!"));
 
+        for (int i = 1; i < 11; i++){
+            clubController.listOfEventsInClub(i,i);
+        }
         // Student 1's clubs & events enrolled in
         userController.userEnrolledInClub(1, 1);
         userController.userEnrolledInClub(1,3);
