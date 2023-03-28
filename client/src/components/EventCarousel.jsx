@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
-import { Grid, Box, Typography} from "@mui/material";
+import { Grid} from "@mui/material";
 import EventCard from "./EventCard";
 
-const EventCarousel = () => {
+const EventCarousel = ({clubId}) => {
 
   const [ events, setEvents] = useState([]);
   
   useEffect(() => {
-    fetch(`http://localhost:8080/events/`)
+    fetch(`http://localhost:8080/clubs/${clubId}/events`)
       .then(res => res.json())
       .then(data => setEvents(prev => data))
   }, [])

@@ -12,7 +12,7 @@ const ClubCarousel = () => {
   useEffect(() => {
     fetch(`http://localhost:8080/clubs/`)
       .then(res => res.json())
-      .then(data => setClubs(data))
+      .then(data => setClubs(prev => data))
   }, [])
 
   return (
