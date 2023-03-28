@@ -14,7 +14,8 @@ public interface ClubService {
     public Club getClub(Integer idClub);
     public void deleteAllClubs();
     public Set<User> getUsersEnrolledInClub(Integer idClub);
-    Club listOfEventsInClub(int idClub, int idEvent);
+    public Club listOfEventsInClub(int idClub, int idEvent);
+    public String clubFinancials(int idClub);
 
 
 }
