@@ -16,6 +16,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import LeaveClubForm from './LeaveClubForm';
+import useAuth from '../hooks/useAuth';
+import { useState } from 'react';
+import { ButtonGroupProps } from '@mui/material';
+import { Modal} from '@mui/material';
+import Box from "@mui/material/Box";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -27,9 +34,9 @@ const ClubCard = styled((props: ExpandMoreProps) => {
   	return <IconButton {...other} />;
   
 }) (({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
 }));
@@ -39,8 +46,40 @@ export default function RecipeReviewCard( {club}) {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  
+  }
 
-  };
+  const [ showLeaveClubForm, setShowLeaveClubForm ] = useState(false);
+  const displayLeaveClubForm = () => {
+    setShowLeaveClubForm(true);
+  }
+
+  const hideLeaveClubForm = () => setShowLeaveClubForm(false);
+
+  const { auth, setAuth } = useAuth();
+
+  const onSubmit = (e) => {
+		e.preventDefault();
+		console.log('You successfully signed up for a club');
+
+		fetch(`http://localhost:8080/users/${auth.id}/clubs/${club.idClub}`, {
+			method: "PUT",
+			headers: {"Content-Type": "application/json"}
+		})
+		.then((res) => {
+			if(res.ok) {
+				return res.json();
+			}
+			throw new Error('Failed to leave club');
+		})
+		.then((data) => {
+			console.log(data);
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+
+  }
 
   return (
     <Card sx={{ maxWidth: 230, minHeight: 350}}>
@@ -61,7 +100,7 @@ export default function RecipeReviewCard( {club}) {
       <CardMedia
         component="img"
         height="194"
-        image={require(`../images/${club.imageString}`)}
+        image={require(`../images/${club.imageString.trim()}`)}
         alt="club_image"
       />
 
@@ -88,9 +127,28 @@ export default function RecipeReviewCard( {club}) {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
+
           <Typography paragraph>
            {club.clubDescription}
           </Typography>
+        
+          <CardActions>
+            <Button
+              className=""
+              onClick={displayLeaveClubForm} 
+              size="small" sx={{color: '#dd2c00', fontWeight: 'bold',buttonAlign: 'center'}}
+            >Leave Club</Button>
+          </CardActions>
+        <Modal
+          open={showLeaveClubForm}
+          onClose={hideLeaveClubForm}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box>
+            <LeaveClubForm onClose={hideLeaveClubForm} onSubmit={onSubmit} clubId={club.idClub}/>
+          </Box>
+        </Modal>
         </CardContent>
       </Collapse>
     </Card>

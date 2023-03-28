@@ -8,13 +8,8 @@ import { AdminPanelSettings } from "@mui/icons-material";
 import { Close } from '@mui/icons-material';
 
 
-const SignUpForm = ({ onClose, onSubmit }) => {
-	const paperStyle = { 
-		padding: "10px 10px", 
-		width: 400, margin: "100px auto", 
-		boxShadow: 'none', 
-		position: "relative"
-	};
+const LeaveClubForm = ({ onClose, onSubmit }) => {
+	const paperStyle = { padding: "50px 20px", width: 400, margin: "20px auto", boxShadow: 'none'};
 	
 	return (  
 		<Container>
@@ -27,17 +22,13 @@ const SignUpForm = ({ onClose, onSubmit }) => {
 				onSubmit={onSubmit}
 			>
 				 <IconButton 
-				 	sx={{ position: 'absolute', 
-					top: '2px', right: '2px',
-					display:'flex', justifyContent: 'flex-end'
-				}} 
-					onClick={onClose} disableRipple>
+				 	sx={{ position: 'absolute', top: '10px', right: '10px'}} 
+					onClick={onClose} disableElevation disableRipple>
            			 <Close />
 				</IconButton>
 				<Typography>
-					<Typography component={'div'} sx={{fontSize: 20, fontWeight:'bold'}}>
-						<br />
-						Press Sign Up button to join the club 
+					<Typography paragraph sx={{fontSize: 20, fontWeight:'bold'}}>
+						Press leave club button to leave the club 
 					</Typography>
 				</Typography>
 				<br />
@@ -47,14 +38,15 @@ const SignUpForm = ({ onClose, onSubmit }) => {
 					style={{
 						minWidth: "60px",
 						minHeight: "40px",
-						backgroundColor: "#FFAC1C",
-						color: "white",
+						backgroundColor: "#d3d3d3",
+						color: "#003366",
 						fontWeight: "bold",
 						fontSize: "12px",
 					}}
 				>
-				Sign Up 
+				Leave Club 
 				</Button>
+
 			</Box>
 			</Paper>
 	  </Container>
@@ -63,4 +55,4 @@ const SignUpForm = ({ onClose, onSubmit }) => {
 	);
 }
  
-export default SignUpForm;
+export default LeaveClubForm;
