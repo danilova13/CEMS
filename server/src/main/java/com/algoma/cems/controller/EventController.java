@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/events")
-@CrossOrigin
 public class EventController {
 
     @Autowired
@@ -39,5 +38,4 @@ public class EventController {
         eventService.deleteAllEvents();
         return ResponseEntity.ok("All events deleted");
     }
-
 }

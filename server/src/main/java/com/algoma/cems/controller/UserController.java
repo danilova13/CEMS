@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping("/")
     public String add(@RequestBody User user){
         userService.saveUser(user);
-        return user.getFirst_Name() + " " + user.getLast_Name() + " has been added into DB";
+        return user.getName()+ " has been added into DB";
     }
 
     // This method will get the endpoints from the user and check with the database to ensure correct log in

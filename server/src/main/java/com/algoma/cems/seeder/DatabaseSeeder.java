@@ -59,11 +59,11 @@ public class DatabaseSeeder implements CommandLineRunner {
         String sqlEvents = "ALTER TABLE event AUTO_INCREMENT = 1";
         entityManager.createNativeQuery(sqlClubs).executeUpdate();
 
-        userController.add(new User("Jimmy", "Phan", "Student1@algomau.ca", "Student1", "student"));
-        userController.add(new User("Anna", "D", "Student2@algomau.ca", "Student2", "student"));
-        userController.add(new User("Ahmed", "Elmolla", "CM1@algomau.ca", "CM1", "clubmanager"));
-        userController.add(new User("Cathy", "Tanya", "Admin1@algomau.ca", "Admin1", "admin"));
-        userController.add(new User("Lev", "On", "Admin2@algomau.ca", "Admin2", "admin"));
+        userController.add(new User("Jimmy Phan", "Student1@algomau.ca", "Student1", "student"));
+        userController.add(new User("Anna D", "Student2@algomau.ca", "Student2", "student"));
+        userController.add(new User("Ahmed Elmolla", "CM1@algomau.ca", "CM1", "clubmanager"));
+        userController.add(new User("Cathy Tanya", "Admin1@algomau.ca", "Admin1", "admin"));
+        userController.add(new User("Lev On", "Admin2@algomau.ca", "Admin2", "admin"));
 
         clubController.add(new Club("Computer Science Club", "This is the Computer Science Club", "science.png"));
         clubController.add(new Club("Photography Club", "This is the Photography Club", "photography.png"));
