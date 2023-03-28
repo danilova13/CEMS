@@ -81,7 +81,7 @@ const PromoteMember = ({ memberModalHandleClick }) => {
     const foundmember = dbMembers.find(
       (dbmember) => dbmember.name == values.members[0]
     );
-    console.log(333, foundmember);
+
     setSelectedMember((prev) => foundmember);
 
     return () => {};
@@ -90,6 +90,7 @@ const PromoteMember = ({ memberModalHandleClick }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(111, values.members[0]);
+
     fetch(`http://localhost:8080/users/${selectedMember.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -111,8 +112,6 @@ const PromoteMember = ({ memberModalHandleClick }) => {
 
     memberModalHandleClick();
   };
-
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
