@@ -37,20 +37,17 @@ const PromoteMember = ({ memberModalHandleClick }) => {
   const [dbMembers, setDbMembers] = useState([]);
   const [dbClubs, setDbClubs] = useState([]);
   const [selectedMember, setSelectedMember] = useState({});
-  const [member, setMember] = useState(""); //need to change to array
   const defaultValues = { clubs: [], members: [] };
   const [values, setValues] = useState(defaultValues);
 
   React.useEffect(() => {
     fetch("http://localhost:8080/users/", {
-      //review this line
       method: "GET",
     })
       .then((res) => {
         if (res.ok) {
           return res.json();
         }
-
         throw new Error("invalid input");
       })
       .then((data) => {
@@ -61,14 +58,12 @@ const PromoteMember = ({ memberModalHandleClick }) => {
       });
 
     fetch("http://localhost:8080/clubs/", {
-      //review this line
       method: "GET",
     })
       .then((res) => {
         if (res.ok) {
           return res.json();
         }
-
         throw new Error("invalid input");
       })
       .then((data) => {
@@ -81,23 +76,21 @@ const PromoteMember = ({ memberModalHandleClick }) => {
     return () => {};
   }, []);
 
+
   React.useEffect(() => {
     const foundmember = dbMembers.find(
-      (dbmember) => dbmember.first_Name == values.member[0]
+      (dbmember) => dbmember.name == values.members[0]
     );
+    console.log(333, foundmember);
     setSelectedMember((prev) => foundmember);
-    console.log(222, selectedMember);
 
     return () => {};
-  }, [member, setMember]);
+  }, [values, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(111, values.members[0]);
-
-    //Add correct endpoint below
-    fetch(`http://localhost:8080/users/`, {
-      //review this line
+    fetch(`http://localhost:8080/users/${selectedMember.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       // body: JSON.stringify(values.members),
@@ -118,6 +111,8 @@ const PromoteMember = ({ memberModalHandleClick }) => {
 
     memberModalHandleClick();
   };
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -188,11 +183,11 @@ const PromoteMember = ({ memberModalHandleClick }) => {
             >
               {dbMembers.map((member) => (
                 <MenuItem
-                  key={member.first_Name}
-                  value={`${member.first_Name} ${member.last_Name}`}
+                  key={member.name}
+                  value={member.name}
                   style={getStyles(member, values.members, theme)}
                 >
-                  {`${member.first_Name} ${member.last_Name}`}
+                  {member.name}
                 </MenuItem>
               ))}
             </Select>
