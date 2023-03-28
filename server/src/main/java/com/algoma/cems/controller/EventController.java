@@ -39,5 +39,4 @@ public class EventController {
         eventService.deleteAllEvents();
         return ResponseEntity.ok("All events deleted");
     }
-
 }

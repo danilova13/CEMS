@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import { Container, Paper } from "@mui/material";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import { AdminPanelSettings } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -35,62 +34,67 @@ const PromoteMember = ({ memberModalHandleClick }) => {
   }
 
   const theme = useTheme();
-  const[dbMembers, setDbMembers] = useState([]);
-  const[dbClubs, setDbClubs] = useState([]);
-
-React.useEffect(() => {
-  fetch("http://localhost:8080/users/", { //review this line
-      method: "GET",
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        throw new Error("invalid input");
-      })
-      .then((data) => {
-        setDbMembers(prev => data)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-  fetch("http://localhost:8080/clubs/", { //review this line
-      method: "GET",
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        throw new Error("invalid input");
-      })
-      .then((data) => {
-        setDbClubs(prev => data)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-  return () => {
-
-  }
-}, [])
-
-
-  const defaultValues = { club: [], member: [] };
+  const [dbMembers, setDbMembers] = useState([]);
+  const [dbClubs, setDbClubs] = useState([]);
+  const [selectedMember, setSelectedMember] = useState({});
+  const defaultValues = { clubs: [], members: [] };
   const [values, setValues] = useState(defaultValues);
+
+  React.useEffect(() => {
+    fetch("http://localhost:8080/users/", {
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("invalid input");
+      })
+      .then((data) => {
+        setDbMembers((prev) => data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    fetch("http://localhost:8080/clubs/", {
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("invalid input");
+      })
+      .then((data) => {
+        setDbClubs((prev) => data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    return () => {};
+  }, []);
+
+
+  React.useEffect(() => {
+    const foundmember = dbMembers.find(
+      (dbmember) => dbmember.name == values.members[0]
+    );
+
+    setSelectedMember((prev) => foundmember);
+
+    return () => {};
+  }, [values, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(111, JSON.stringify(values));
+    console.log(111, values.members[0]);
 
-    //Add correct endpoint below
-    fetch("http://localhost:8080/users/promote", {//review this line
+    fetch(`http://localhost:8080/users/${selectedMember.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
+      // body: JSON.stringify(values.members),
     })
       .then((res) => {
         if (res.ok) {
@@ -130,8 +134,8 @@ React.useEffect(() => {
               labelId="clubs"
               id="clubs"
               multiple
-              name="club"
-              value={values.club}
+              name="clubs"
+              value={values.clubs}
               onChange={handleChange}
               input={<OutlinedInput id="select-multiple-chip" label="Clubs" />}
               renderValue={(selected) => (
@@ -147,7 +151,7 @@ React.useEffect(() => {
                 <MenuItem
                   key={club.nameClub}
                   value={club.nameClub}
-                  style={getStyles(club.nameClub, values.member, theme)}
+                  style={getStyles(club.nameClub, values.members, theme)}
                 >
                   {club.nameClub}
                 </MenuItem>
@@ -161,8 +165,8 @@ React.useEffect(() => {
               labelId="members"
               id="members"
               multiple
-              name="member"
-              value={values.member}
+              name="members"
+              value={values.members}
               onChange={handleChange}
               input={
                 <OutlinedInput id="select-multiple-chip" label="members" />
@@ -178,11 +182,11 @@ React.useEffect(() => {
             >
               {dbMembers.map((member) => (
                 <MenuItem
-                  key={member.first_Name}
-                  value={`${member.first_Name} ${member.last_Name}`}
-                  style={getStyles(member, values.member, theme)}
+                  key={member.name}
+                  value={member.name}
+                  style={getStyles(member, values.members, theme)}
                 >
-                  {`${member.first_Name} ${member.last_Name}`}
+                  {member.name}
                 </MenuItem>
               ))}
             </Select>
