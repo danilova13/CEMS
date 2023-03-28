@@ -40,7 +40,7 @@ const EditMembers = ({ membersModalHandleClick }) => {
   }, []);
 
   React.useEffect(() => {
-    const foundmember = dbMembers.find((dbmember) => dbmember.first_Name == member);
+    const foundmember = dbMembers.find((dbmember) => dbmember.name == member);
     setSelectedMember((prev) => foundmember);
     // console.log(222, selectedMember);
 
@@ -86,8 +86,8 @@ const EditMembers = ({ membersModalHandleClick }) => {
               <em>None</em>
             </MenuItem>
             {dbMembers.map((member) => (
-              <MenuItem key={member.first_Name} value={member.first_Name}>
-                 {`${member.first_Name} ${member.last_Name}`}
+              <MenuItem key={member.name} value={member.name}>
+                 {member.name}
               </MenuItem>
             ))}
           </Select>
