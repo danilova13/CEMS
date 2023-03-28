@@ -65,7 +65,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         userController.add(new User("Cathy", "Tanya", "Admin1@algomau.ca", "Admin1", "admin"));
         userController.add(new User("Lev", "On", "Admin2@algomau.ca", "Admin2", "admin"));
 
-        clubController.add(new Club("Computer Science Club", "This is the Computer Science Club", "science.png "));
+        clubController.add(new Club("Computer Science Club", "This is the Computer Science Club", "science.png"));
         clubController.add(new Club("Photography Club", "This is the Photography Club", "photography.png"));
         clubController.add(new Club("Basketball Club", "This is the Basketball Club", "basketball.png"));
         clubController.add(new Club("Chess Club", "This is the Chess Club", "chessclub.png "));
