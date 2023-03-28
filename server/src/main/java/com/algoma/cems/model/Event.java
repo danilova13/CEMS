@@ -24,6 +24,9 @@ public class Event {
     @ManyToMany(mappedBy = "attendingEvent")
     private Set<User> userAttending = new HashSet<>();
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "clubevents")
+    private Set<Club> eventsInClub = new HashSet<>();
 
     public Event() {
     }

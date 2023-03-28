@@ -19,7 +19,12 @@ public class Club {
     @ManyToMany(mappedBy = "enrolledClubs")
     private Set<User> enrolledUsers = new HashSet<>();
 
-
+    @ManyToMany
+    @JoinTable(name = "events_in_club",
+            joinColumns = @JoinColumn(name = "club_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> clubevents = new HashSet<>();
     public Club() {
     }
 
@@ -64,4 +69,11 @@ public class Club {
         this.enrolledUsers = enrolledUsers;
     }
 
+    public Set<Event> getClubevents() {
+        return clubevents;
+    }
+
+    public void setClubevents(Set<Event> clubevents) {
+        this.clubevents = clubevents;
+    }
 }
