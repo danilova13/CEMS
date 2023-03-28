@@ -42,7 +42,7 @@ public class ClubServiceImplementation implements ClubService{
     }
 
     @Override
-    public Set<User> getUsersAttendingEvent(Integer idClub) {
+    public Set<User> getUsersEnrolledInClub(Integer idClub) {
         Club club = clubRepository.findById(idClub).get();
         return club.getEnrolledUsers();
     }

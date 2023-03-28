@@ -13,7 +13,7 @@ public interface ClubService {
     public List<Club> getAllClubs();
     public Club getClub(Integer idClub);
     public void deleteAllClubs();
-    public Set<User> getUsersAttendingEvent(Integer idClub);
+    public Set<User> getUsersEnrolledInClub(Integer idClub);
     Club listOfEventsInClub(int idClub, int idEvent);
 
 
