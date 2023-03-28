@@ -19,7 +19,7 @@ const ClubCarousel = () => {
 
     <div className="w-full flex flex-col items-center">
       <Carousel 
-        className="w-[50%]"
+        className="w-[70%]"
         animation="slide"
         newButtonsAlwaysVisible={true}
         duration={1500}
