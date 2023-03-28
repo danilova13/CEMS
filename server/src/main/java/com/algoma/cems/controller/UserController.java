@@ -66,6 +66,7 @@ public class UserController {
         return userService.userEnrolledInClub(id,idClub);
     }
 
+
     @PutMapping("/{id}/events/{idEvent}")
     public User userEnrolledInEvent(
             @PathVariable int id,

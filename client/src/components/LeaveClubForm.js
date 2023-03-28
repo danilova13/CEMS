@@ -9,7 +9,12 @@ import { Close } from '@mui/icons-material';
 
 
 const LeaveClubForm = ({ onClose, onSubmit }) => {
-	const paperStyle = { padding: "50px 20px", width: 400, margin: "20px auto", boxShadow: 'none'};
+	const paperStyle = { 
+		padding: "10px 10px", 
+		width: 400, margin: "100px auto", 
+		boxShadow: 'none',
+		position: 'relative'
+	};
 	
 	return (  
 		<Container>
@@ -22,12 +27,16 @@ const LeaveClubForm = ({ onClose, onSubmit }) => {
 				onSubmit={onSubmit}
 			>
 				 <IconButton 
-				 	sx={{ position: 'absolute', top: '10px', right: '10px'}} 
+				 	sx={{ 
+						position: 'absolute', 
+						top: '1px', right: '1px',
+						display:'flex', justifyContent: 'flex-end'
+					}}
 					onClick={onClose} disableElevation disableRipple>
            			 <Close />
 				</IconButton>
 				<Typography>
-					<Typography paragraph sx={{fontSize: 20, fontWeight:'bold'}}>
+					<Typography paragraph sx={{fontSize: 20, fontWeight:'bold', pt: 5}}>
 						Press leave club button to leave the club 
 					</Typography>
 				</Typography>
@@ -38,8 +47,8 @@ const LeaveClubForm = ({ onClose, onSubmit }) => {
 					style={{
 						minWidth: "60px",
 						minHeight: "40px",
-						backgroundColor: "#d3d3d3",
-						color: "#003366",
+						backgroundColor: "#FFAC1C",
+						color: "white",
 						fontWeight: "bold",
 						fontSize: "12px",
 					}}

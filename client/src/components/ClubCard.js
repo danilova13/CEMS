@@ -135,16 +135,16 @@ export default function RecipeReviewCard( {club}) {
               size="small" sx={{color: '#dd2c00', fontWeight: 'bold',buttonAlign: 'center'}}
             >Leave Club</Button>
           </CardActions>
-        <Modal
+          <Modal
           open={showLeaveClubForm}
           onClose={hideLeaveClubForm}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-        >
-          <Box>
-            <LeaveClubForm onClose={hideLeaveClubForm} onSubmit={onSubmit} clubId={club.idClub}/>
-          </Box>
-        </Modal>
+          >
+            <Box>
+              <LeaveClubForm onClose={hideLeaveClubForm} onSubmit={onSubmit} clubId={club.idClub}/>
+            </Box>
+          </Modal>
         </CardContent>
       </Collapse>
     </Card>
