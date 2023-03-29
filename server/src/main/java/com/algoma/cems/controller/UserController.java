@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -87,5 +88,11 @@ public class UserController {
             @PathVariable int id
     ){
         return userService.getEventForUser(id);
+    }
+
+    @PutMapping("/")
+    public Optional<User> updateUser(@RequestBody User userUpgrade){
+        userRepository.save(userUpgrade);
+        return userRepository.findById(userUpgrade.getId());
     }
 }
