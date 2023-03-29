@@ -1,6 +1,7 @@
 package com.algoma.cems.service;
 
 import com.algoma.cems.model.Club;
+import com.algoma.cems.model.Event;
 import com.algoma.cems.model.User;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,5 @@ public interface ClubService {
     public Set<User> getUsersEnrolledInClub(Integer idClub);
     public Club listOfEventsInClub(int idClub, int idEvent);
     public String clubFinancials(int idClub);
-
-
+    public Set<Event> getEventsForClub(int idClub);
 }

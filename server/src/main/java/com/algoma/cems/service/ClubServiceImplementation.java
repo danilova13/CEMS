@@ -57,6 +57,10 @@ public class ClubServiceImplementation implements ClubService{
         return clubRepository.save(club);
     }
 
+    public Set<Event> getEventsForClub(int idClub){
+        Club club = clubRepository.findById(idClub).get();
+        return club.getClubevents();
+    }
     @Override
     public String clubFinancials(int idClub) {
         Set<Event> clubEvents = null;
