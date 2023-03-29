@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Container, Paper } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -23,78 +23,56 @@ const PromoteMember = ({ memberModalHandleClick }) => {
       },
     },
   };
-
+  
   function getStyles(name, member, theme) {
     return {
       fontWeight:
-        member.indexOf(name) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightMedium,
+      member.indexOf(name) === -1
+      ? theme.typography.fontWeightRegular
+      : theme.typography.fontWeightMedium,
     };
   }
-
+  
   const theme = useTheme();
   const [dbMembers, setDbMembers] = useState([]);
   const [dbClubs, setDbClubs] = useState([]);
   const [selectedMember, setSelectedMember] = useState({});
   const defaultValues = { clubs: [], members: [] };
   const [values, setValues] = useState(defaultValues);
+  
 
-  React.useEffect(() => {
-    fetch("http://localhost:8080/users/", {
-      method: "GET",
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error("invalid input");
-      })
-      .then((data) => {
-        setDbMembers((prev) => data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  useEffect(() => {
+    fetch(`http://localhost:8080/users/`)
+    .then(res => res.json())
+    .then(data => setDbMembers((prev) => data))
 
-    fetch("http://localhost:8080/clubs/", {
-      method: "GET",
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error("invalid input");
-      })
-      .then((data) => {
-        setDbClubs((prev) => data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fetch(`http://localhost:8080/clubs/`)
+    .then(res => res.json())
+    .then(data => setDbClubs((prev) => data))
 
     return () => {};
   }, []);
 
 
-  React.useEffect(() => {
-    const foundmember = dbMembers.find(
-      (dbmember) => dbmember.name == values.members[0]
-    );
-
-    setSelectedMember((prev) => foundmember);
+  useEffect(() => {
+    const foundMember = dbMembers.find(
+      (dbmember) => dbmember.name == values.members[0]);
+    setSelectedMember((prev) => {
+      return {...foundMember, role: "clubmanager"};
+      });
 
     return () => {};
   }, [values, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(111, values.members[0]);
+    console.log(111, selectedMember);
 
-    fetch(`http://localhost:8080/users/${selectedMember.id}`, {
+    // fetch(`http://localhost:8080/users/${selectedMember.id}`, {
+    fetch(`http://localhost:8080/users/`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify(values.members),
+      body: JSON.stringify(selectedMember),
     })
       .then((res) => {
         if (res.ok) {

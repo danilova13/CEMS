@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Container, Paper } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,47 +9,27 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const EditMembers = ({ membersModalHandleClick }) => {
-
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
   
   const [member, setMember] = useState("");
   const [dbMembers, setDbMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState({});
 
-  React.useEffect(() => {
-    fetch("http://localhost:8080/users/", {
-      //review this line
-      method: "GET",
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
+  useEffect(() => {
+    fetch(`http://localhost:8080/users/`)
+      .then(res => res.json())
+      .then(data => setDbMembers((prev) => data))
+  }, [])
 
-        throw new Error("invalid input");
-      })
-      .then((data) => {
-        console.log(111, data);
-        setDbMembers((prev) => data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    return () => {};
-  }, []);
-
-  React.useEffect(() => {
+  useEffect(() => {
     const foundmember = dbMembers.find((dbmember) => dbmember.name == member);
     setSelectedMember((prev) => foundmember);
-    // console.log(222, selectedMember);
-
+    console.log(222, selectedMember);
     return () => {};
   }, [member, setMember]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(111,JSON.stringify(memberData));
 
     fetch(`http://localhost:8080/members/${selectedMember.id}`, {
       method: "DELETE",
