@@ -59,7 +59,7 @@ export default function RecipeReviewCard( {club}) {
 		console.log('You successfully signed up for a club');
 
 		fetch(`http://localhost:8080/users/${auth.id}/clubs/${club.idClub}`, {
-			method: "PUT",
+			method: "DELETE",
 			headers: {"Content-Type": "application/json"}
 		})
 		.then((res) => {

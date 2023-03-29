@@ -47,6 +47,7 @@ export default function ClubListCard({club}){
 		})
 		.catch((err) => {
 			console.log(err);
+			console.log('blaaah');
 		})
 	}
 
