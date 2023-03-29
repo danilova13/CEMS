@@ -47,7 +47,7 @@ const Manager = () => {
       <div className="grid grid-cols-2 gap-x-10 gap-y-10 w-42 h-150 mt-24">
       <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={clubModalHandleClick} variant="contained" size="large" >Edit clubs</Button>
       <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={eventModalHandleClick} variant="contained" size="large">Create Events</Button>
-      <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={membersModalHandleClick} variant="contained" size="large">Edit members</Button>
+      {/* <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={membersModalHandleClick} variant="contained" size="large">Edit members</Button> */}
       <Button className="!bg-[#FC9F26] !font-bold !m-20" onClick={reportsModalHandleClick} variant="contained" size="large">Financial reports</Button>
       </div>
       <Modal
@@ -70,7 +70,7 @@ const Manager = () => {
 					<CreateEvent eventModalHandleClick={eventModalHandleClick}></CreateEvent>
         </Box>
       </Modal>
-      <Modal
+      {/* <Modal
         open={showMembers}
         onClose={membersModalHandleClick}
         aria-labelledby="modal-modal-title"
@@ -79,7 +79,7 @@ const Manager = () => {
         <Box>
 					<EditMembers membersModalHandleClick={membersModalHandleClick}></EditMembers>
         </Box>
-      </Modal>
+      </Modal> */}
       <Modal
         open={showReports}
         onClose={reportsModalHandleClick}

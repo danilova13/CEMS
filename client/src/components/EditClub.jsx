@@ -13,9 +13,8 @@ const EditClub = ({clubModalHandleClick}) => {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
  
   const defaultData = {nameClub: "", clubDescription: "", imageString: "",};
-  const [clubData, setClubData] = useState(defaultData);
-
   
+  const [clubData, setClubData] = useState(defaultData);
   const [club, setClub] = useState("");
   const[dbClubs, setDbClubs] = useState([]);
   const [selectedClub, setSelectedClub] = useState({});
