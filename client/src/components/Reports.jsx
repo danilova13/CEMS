@@ -47,10 +47,8 @@ const Reports = () => {
       fetch(`http://localhost:8080/clubs/${selectedClub?.idClub}/financials`, {
         method: "GET",
       })
-      // .then((res) => res)
-      .then((res) => console.log(222, res))
-      // .then(data => setReport(prev => data))
-      .then((data) => console.log(333, data));
+      .then((res) => res.json())
+      .then(data => setReport(prev => data))
     }
     submitCount ++;
     setShowReport((prev) => true);
@@ -87,7 +85,7 @@ const Reports = () => {
           <br />
           {showReport && (
             <div>
-              <p>Report</p>
+              <p>{report.financeReport}</p>
             </div>
           )}
           <Button

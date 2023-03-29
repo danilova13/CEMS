@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Container, Paper } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,14 +13,13 @@ const EditClub = ({clubModalHandleClick}) => {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
  
   const defaultData = {nameClub: "", clubDescription: "", imageString: "",};
-  const [clubData, setClubData] = useState(defaultData);
-
   
-  const [club, setClub] = useState("");
-  const[dbClubs, setDbClubs] = useState([]);
+  const [club, setClub] = useState(""); //Handling club dropdown choice
+  const[dbClubs, setDbClubs] = useState([]);// Storing list of clubs
+  const [clubData, setClubData] = useState(defaultData);
   const [selectedClub, setSelectedClub] = useState({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch("http://localhost:8080/clubs/", { //review this line
         method: "GET",
       })
@@ -32,7 +31,6 @@ const EditClub = ({clubModalHandleClick}) => {
           throw new Error("invalid input");
         })
         .then((data) => {
-          console.log(111, data);
           setDbClubs(prev => data)
         })
         .catch((err) => {
@@ -44,11 +42,9 @@ const EditClub = ({clubModalHandleClick}) => {
     }
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     const foundClub = dbClubs.find(dbClub => dbClub.nameClub == club);
-    setSelectedClub(prev => foundClub)
-    // console.log(222, selectedClub);
-
+    setClubData(prev => foundClub)
     return () => {
   
     }
@@ -56,9 +52,9 @@ const EditClub = ({clubModalHandleClick}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(111,JSON.stringify(clubData));
+    console.log(111,JSON.stringify(clubData));
 
-		fetch(`http://localhost:8080/clubs/${selectedClub.idClub}`, {
+		fetch(`http://localhost:8080/clubs/`, {
 			method: "PUT",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify(clubData)
@@ -120,26 +116,26 @@ const EditClub = ({clubModalHandleClick}) => {
         >
           <TextField
             id="outlined-basic"
-            label={selectedClub?.nameClub|| "Name of the club"}
+            label="Name of the club"
             variant="outlined"
             name="nameClub"
-            value={clubData.nameClub}
+            value={clubData?.nameClub|| ""}
             onChange={handleChange}
             />
           <TextField
             id="outlined-basic"
-            label={selectedClub?.clubDescription|| "Club description"}
+            label="Club description"
             variant="outlined"
             name="clubDescription"
-            value={clubData.clubDescription}
+            value={clubData?.clubDescription || ""}
             onChange={handleChange}
             />
           <TextField
             id="outlined-basic"
-            label={selectedClub?.imageString|| "Club image url"}
+            label="Club image url"
             variant="outlined"
             name="imageString"
-            value={clubData.imageString}
+            value={clubData?.imageString|| ""}
             onChange={handleChange}
             />
           <br />

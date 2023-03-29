@@ -8,8 +8,7 @@ const EventCarousel = ({clubId}) => {
   const [ events, setEvents] = useState([]);
   
   useEffect(() => {
-    // fetch(`http://localhost:8080/clubs/${clubId}/events`)
-    fetch(`http://localhost:8080/events/`)
+    fetch(`http://localhost:8080/clubs/${clubId}/events`)
       .then(res => res.json())
       .then(data => setEvents(prev => data))
   }, [])
