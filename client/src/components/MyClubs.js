@@ -13,6 +13,7 @@ const MyClubs = () => {
 
 	useEffect(() => {
 		fetch(`http://localhost:8080/users/${auth.id}/clubs`)
+
 			.then(res => res.json())
 			.then(data => setClubs(data))
 	}, [])
