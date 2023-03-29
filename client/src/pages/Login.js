@@ -9,7 +9,7 @@ import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Image from '../images/photo5.jpg'
 import Popover from '@mui/material';
-
+import { ROLES } from '../Roles'
 
 
 export default function Login() {
@@ -45,7 +45,21 @@ export default function Login() {
 			console.log(data);
 			setAuth(data);
 			//navigating to from value - where the user wanted to go before they were sent to the login page
-			navigate(from, {replace: true }); 
+			// if admin role -> navigate to /admin route
+			//if manager -> navigate to /manager route
+			// if student -> navigate to /
+			if (data.role == ROLES.Admin) {
+				navigate('/admin', {replace: true }); 
+			}
+			else if (data.role == ROLES.Manager) {
+				navigate('/manager', {replace: true });
+			} 
+
+			else if (data.role == ROLES.Student) {
+				navigate('/', {replace: true });
+			}
+
+				
 		})
 		.catch((err) => {
 			console.log(err);
