@@ -25,6 +25,7 @@ public interface UserService {
 
     public Set<Club> getClubsForUser(int id);
     public Set<Event> getEventForUser(int id);
+    public void deleteClubFromUser(int id, int idClub);
 }
 
 

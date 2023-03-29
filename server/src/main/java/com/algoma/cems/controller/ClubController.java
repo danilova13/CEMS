@@ -1,6 +1,7 @@
 package com.algoma.cems.controller;
 
 import com.algoma.cems.model.Club;
+import com.algoma.cems.model.Financials;
 import com.algoma.cems.model.User;
 import com.algoma.cems.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,9 @@ public class ClubController {
     }
 
     @GetMapping("/{idClub}/financials")
-    public String clubFinancials(@PathVariable int idClub){
-        return clubService.clubFinancials(idClub);
+    public Financials clubFinancials(@PathVariable int idClub){
+        Financials financeReport = new Financials("");
+        financeReport.setFinanceReport(clubService.clubFinancials(idClub));
+        return financeReport;
     }
 }

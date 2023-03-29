@@ -95,4 +95,10 @@ public class UserController {
         userRepository.save(userUpgrade);
         return userRepository.findById(userUpgrade.getId());
     }
+
+    @DeleteMapping("/{id}/clubs/{idClub}")
+    public ResponseEntity<String> deleteUserFromClub(@PathVariable int id, @PathVariable int idClub){
+        userService.deleteClubFromUser(id, idClub);
+        return ResponseEntity.ok("Deleted User From Club");
+    }
 }

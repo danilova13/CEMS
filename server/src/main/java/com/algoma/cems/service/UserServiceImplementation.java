@@ -76,4 +76,15 @@ public class UserServiceImplementation implements UserService{
         User user = userRepository.findById(id).get();
         return user.getAttendingEvent();
     }
+
+    @Override
+    public void deleteClubFromUser(int id, int idClub) {
+        Set<Club> clubSet = null;
+        User user = userRepository.findById(id).get();
+        Club club = clubRepository.findById(idClub).get();
+        clubSet = user.getEnrolledClubs();
+        clubSet.remove(club);
+        user.setEnrolledClubs(clubSet);
+        userRepository.save(user);
+    }
 }

@@ -69,6 +69,7 @@ public class ClubServiceImplementation implements ClubService{
             int temp = costPer * membersAttending;
             revenue += temp;
         }
-        return "The " + club.getNameClub() + " had " + clubEvents.stream().count() + " events that brought in " + revenue + "$";
+        String s = "The " + club.getNameClub() + " had " + clubEvents.stream().count() + " events that brought in " + revenue + "$";
+        return s;
     }
 }
