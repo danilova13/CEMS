@@ -49,6 +49,8 @@ export default function ClubListCard({club}){
 			console.log(err);
 			console.log('blaaah');
 		})
+
+		hideSignUpForm();
 	}
 
 	return ( 
