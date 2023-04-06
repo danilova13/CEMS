@@ -9,13 +9,40 @@ import useAuth from "../hooks/useAuth";
 const MyClubs = () => {
 
 	const [ clubs, setClubs ] = useState([]);
-	const { auth } = useAuth();
+	const { auth, setAuth } = useAuth();
 
 	useEffect(() => {
 		fetch(`http://localhost:8080/users/${auth.id}/clubs`)
 
 			.then(res => res.json())
 			.then(data => setClubs(data))
+	}, [])
+
+
+	const user = {email: auth.email, password: auth.password}
+	useEffect(() => {
+		fetch(`http://localhost:8080/users/${auth.id}/clubs`)
+
+			.then(res => res.json())
+			.then(data => setClubs(data))
+	}, [])
+
+	useEffect(() => {
+		fetch("http://localhost:8080/users/login",{
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify(user)
+		})
+		.then ((res) => {
+			if (res.ok) {
+				return res.json();
+			}
+	
+			throw new Error("invalid input");
+		})
+		.then((data) => {
+			console.log(data);
+			setAuth(data)})
 	}, [])
 
 	return (
