@@ -31,7 +31,7 @@ const EventCard = ({ event }) => {
         .catch((err) => {
           console.log(err);
         });
-
+        alert('Successfully registered for the event');
         count++;
     }
   };

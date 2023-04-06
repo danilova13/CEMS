@@ -32,7 +32,8 @@ const Club = () => {
         subheader=""
      	 />
 		<CardMedia
-		  sx={{ minHeight: 500 }}
+		//   sx={{ maxHeight: 500 }}
+			className='h-60'
 		  image={require(`../images/${club?.imageString}`)}
 		  title="club_image"
 		/>

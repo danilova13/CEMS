@@ -74,7 +74,8 @@ export default function RecipeReviewCard( {club}) {
 		.catch((err) => {
 			console.log(err);
 		})
-
+    
+    hideLeaveClubForm();
   }
 
   return (
